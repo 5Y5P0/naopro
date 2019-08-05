@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.89
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "naopro", "naopro\naopro.csproj", "{B97FF600-8842-4514-9A0E-82B44DC6CE01}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B97FF600-8842-4514-9A0E-82B44DC6CE01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B97FF600-8842-4514-9A0E-82B44DC6CE01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B97FF600-8842-4514-9A0E-82B44DC6CE01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B97FF600-8842-4514-9A0E-82B44DC6CE01}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B9515511-8120-456A-9DC3-E013F40C1356}
+	EndGlobalSection
+EndGlobal
