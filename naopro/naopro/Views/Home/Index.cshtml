@@ -1,16 +1,35 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Nos services";
 }
+
+<style>
+
+.card-deck {
+    margin:0px;
+}
+
+.card-deck .card {
+    margin-bottom: 0px;
+    margin-top: 15px;
+    margin-left: 7.5px;
+    margin-right: 7.5px;
+}
+
+.card-img-top {
+    padding:10px;
+}
+
+</style>
 
 <div class="card-deck">
     <div class="card">
         <img class="card-img-top" src="~/Images/accounting-3190208_640.jpg" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">Achat</h5>
-            <p class="card-text">
-            <p>Nous vous accompagnons dans l'acquisition de vos équipements et logiciels informatiques.</p>
-            <p>A partir de votre besoin, nous recherchons la meilleure offre, puis nous   </p>
-            </p>
+            <div class="card-text">
+                <p>Nous vous accompagnons dans l'acquisition de vos équipements et logiciels informatiques.</p>
+                <p>A partir de votre besoin, nous recherchons les offres adéquates, puis nous négocions pour vous les meilleures conditions tarifaires.</p>
+            </div>
         </div>
         <div class="card-footer">
             <small class="text-muted">Last updated 3 mins ago</small>
@@ -20,7 +39,10 @@
         <img class="card-img-top" src="~/Images/computer-3343887_640.jpg" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">Assistance</h5>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            <div class="card-text">
+                <p>Nous vous aidons à résoudre vos problèmes informatiques.</p>
+                <p>Après analyse de l'incident, nous déterminons ensemble la solution adéquate.</p>
+            </div>
         </div>
         <div class="card-footer">
             <small class="text-muted">Last updated 3 mins ago</small>
@@ -30,10 +52,45 @@
         <img class="card-img-top" src="~/Images/application-3399516_640.jpg" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">Formation</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+            <div class="card-text">
+                <p>Nous vous enseignons à résoudre vos problèmes informatiques.</p>
+                <p>Après analyse de l'incident, nous déterminons ensemble la solution adéquate.</p>
+            </div>
         </div>
         <div class="card-footer">
             <small class="text-muted">Last updated 3 mins ago</small>
         </div>
     </div>
+
+</div>
+
+<div class="card-deck">
+
+    <div class="card">
+        <img class="card-img-top" src="~/Images/computer-3343887_640.jpg" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Assistance</h5>
+            <div class="card-text">
+                <p>Nous vous aidons à résoudre vos problèmes informatiques.</p>
+                <p>Après analyse des difficultés que vous rencontrez, nous déterminons ensemble la meilleure solution.</p>
+            </div>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+    </div>
+    <div class="card">
+        <img class="card-img-top" src="~/Images/application-3399516_640.jpg" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Conseil</h5>
+            <div class="card-text">
+                <p>Nous vous proposons également des services sur-mesure.</p>
+                <p>Vous avez un autre besoin, nous pouvons vous guider dans la réalisation de votre projet.</p>
+            </div>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+    </div>
+    <div class="card border-0"></div>
 </div>
