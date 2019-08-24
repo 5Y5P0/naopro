@@ -14,7 +14,7 @@
    viewBox="0 0 8.4666667 8.4666667"
    version="1.1"
    id="svg4528"
-   sodipodi:docname="dessin.svg"
+   sodipodi:docname="glop.svg"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
   <defs
      id="defs4522" />
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="22.4"
-     inkscape:cx="8.1523646"
-     inkscape:cy="28.757968"
+     inkscape:cx="-8.1422783"
+     inkscape:cy="16.257968"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="true"
@@ -57,36 +57,21 @@
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-288.53333)">
-    <rect
-       style="opacity:0.2;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.25816107;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
-       id="rect5075"
-       width="6.0918388"
-       height="4.5043392"
-       x="1.1874139"
-       y="289.72076" />
-    <rect
-       style="opacity:0.2;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.24239442;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
-       id="rect5092"
-       width="7.6951056"
-       height="0.5513556"
-       x="0.38578057"
-       y="295.00452" />
-  </g>
+     transform="translate(0,-288.53333)" />
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Calque flèche">
     <path
        style="opacity:0.2;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.233;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
-       d="m -3.4553751,-3.845988 v 0.5694744 a 1.4552083,1.4552083 0 0 0 -0.5358847,0.2222085 l -0.403076,-0.4025594 -0.3917074,0.3917074 0.4020425,0.4020426 a 1.4552083,1.4552083 0 0 0 -0.2216917,0.5369182 h -0.5694743 v 0.554488 h 0.5694743 a 1.4552083,1.4552083 0 0 0 0.2227255,0.5358846 l -0.4030763,0.40307616 0.3917074,0.39170735 0.4020426,-0.40204263 a 1.4552083,1.4552083 0 0 0 0.5369181,0.22169189 v 0.56947427 h 0.5544881 v -0.56947427 a 1.4552083,1.4552083 0 0 0 0.5364014,-0.22272542 l 0.4025594,0.40307616 0.3917073,-0.39170735 -0.4020426,-0.40204266 a 1.4552083,1.4552083 0 0 0 0.2216919,-0.5369181 h 0.5694742 v -0.554488 H -1.7505696 A 1.4552083,1.4552083 0 0 0 -1.973295,-2.6620809 l 0.4030761,-0.4030762 -0.3917073,-0.3917074 -0.4020427,0.4020427 A 1.4552083,1.4552083 0 0 0 -2.900887,-3.2765136 V -3.845988 Z"
+       d="M 3.7108847,1.8541504 V 2.4236248 A 1.4552083,1.4552083 0 0 0 3.175,2.6458333 L 2.771924,2.2432739 2.3802166,2.6349813 2.7822591,3.0370239 A 1.4552083,1.4552083 0 0 0 2.5605674,3.5739421 H 1.9910931 v 0.554488 H 2.5605674 A 1.4552083,1.4552083 0 0 0 2.7832929,4.6643147 L 2.3802166,5.0673908 2.771924,5.4590982 3.1739666,5.0570555 A 1.4552083,1.4552083 0 0 0 3.7108847,5.2787474 V 5.8482217 H 4.2653728 V 5.2787474 A 1.4552083,1.4552083 0 0 0 4.8017742,5.056022 L 5.2043336,5.4590982 5.5960409,5.0673908 5.1939983,4.6653482 A 1.4552083,1.4552083 0 0 0 5.4156902,4.1284301 H 5.9851644 V 3.5739421 H 5.4156902 A 1.4552083,1.4552083 0 0 0 5.1929648,3.0380575 L 5.5960409,2.6349813 5.2043336,2.2432739 4.8022909,2.6453166 A 1.4552083,1.4552083 0 0 0 4.2653728,2.4236248 V 1.8541504 Z"
        id="path816"
        inkscape:connector-curvature="0" />
     <circle
        style="opacity:0.2;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.09805878;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
        id="path816-5"
-       cx="-3.6693959"
-       cy="-0.84823161"
+       cx="3.6829054"
+       cy="4.318378"
        r="0.61242896" />
     <circle
        r="1.4552083"
