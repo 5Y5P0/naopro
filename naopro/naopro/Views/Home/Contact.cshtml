@@ -1,4 +1,5 @@
-﻿@{
+﻿@model HomeViewModel
+@{
     ViewData["Title"] = "LegalNotice";
 }
 
@@ -6,187 +7,37 @@
     <span>Mentions légales</span>
 </h1>
 
-<p class="text-center">
-    <i>   
-        <span>
-            En vigueur au
-            05/08/2019
-</span>
-    </i>
-</p>
+<input type="button" value="Click to Display Map" onclick="DisplayGoogleMap()" />
+<div id="myDiv" style="width:100%;height:400px;"></div>
 
-<p>
-    <span>&nbsp;</span>
-</p>
+@section Scripts
+{
+    <script src="@Model.GooleApi"></script>
+    <script type="text/javascript">
 
-<p>
-    <span>
-        Conformément aux
-        dispositions des Articles 6-III et 19 de la Loi n°2004-575 du 21 juin 2004 pour
-        la Confiance dans l’économie numérique, dite L.C.E.N., il est porté à la
-        connaissance des Utilisateurs du site <i>www.naopro.net&nbsp;</i>les
-        présentes mentions légales.
-    </span>
-</p>
+        function DisplayGoogleMap() {
 
-<p>
-    <span>
-        La connexion et la
-        navigation sur le site (www.naopro.net) par l’Utilisateur implique acceptation
-        intégrale et sans réserve des présentes mentions légales.<o:p></o:p>
-    </span>
-</p>
+            //Set the Latitude and Longitude of the Map
+            var myAddress = new google.maps.LatLng(24.466807, 54.384297);
 
-<p>
-    <span>
-        Ces dernières sont
-        accessibles sur le site à la rubrique « Mentions légales ».<o:p></o:p>
-    </span>
-</p>
+            //Create Options or set different Characteristics of Google Map
+            var mapOptions = {
+                center: myAddress,
+                zoom: 15,
+                minZoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
 
-<p><span>&nbsp;</span></p>
+            //Display the Google map in the div control with the defined Options
+            var map = new google.maps.Map(document.getElementById("myDiv"), mapOptions);
 
-<h1><span>ARTICLE 1 : L’éditeur</span></h1>
+            //Set Marker on the Map
+            var marker = new google.maps.Marker({
+                position: myAddress,
+                animation: google.maps.Animation.BOUNCE,
+            });
 
-<p>
-    <span>
-        L’édition et la direction
-        de la publication du site www.naopro.net est assurée par FOUCHER Sébastien,
-        domiciliée 5 allée de la vigne, dont le numéro de
-        téléphone est 0671196962, et l'adresse e-mail sebastien@naopro.net.<o:p></o:p>
-    </span>
-</p>
-
-<p><span>&nbsp;</span></p>
-
-<h1>
-    <span>
-        ARTICLE 2 :
-        L’hébergeur
-    </span>
-</h1>
-
-<p>
-    <span>
-        L'hébergeur du site
-        www.naopro.net est la Société 1&amp;1 IONOS Cloud GmbH,
-        dont le siège social est situé au Greifswalder Str. 207, 10405 Berlin, Allemagne, avec le numéro de
-        téléphone : +49 30 57700 850.
-    </span>
-</p>
-
-<p><span>&nbsp;</span></p>
-
-<h1>
-    <span>
-        ARTICLE 3 : Accès
-        au site
-    </span>
-</h1>
-
-<p>
-    <span>
-        Le site est accessible
-        par tout endroit, 7j/7, 24h/24 sauf cas de force majeure, interruption
-        programmée ou non et pouvant découlant d’une nécessité de maintenance.
-    </span>
-</p>
-
-<p>
-    <span>
-        En cas de modification,
-        interruption ou suspension des services le site <i>www.naopro.net&nbsp;</i>ne saurait être tenu responsable.
-    </span>
-</p>
-
-<p><span>&nbsp;</span></p>
-
-<h1>
-    <span>
-        ARTICLE 4 :
-        Collecte des données
-    </span>
-</h1>
-
-<p>
-    <span>
-        Le site est exempté de
-        déclaration à la Commission Nationale Informatique et Libertés (CNIL) dans la
-        mesure où il ne collecte aucune donnée concernant les utilisateurs.
-    </span>
-</p>
-
-<p><span>&nbsp;</span></p>
-
-<h1>
-    <span>
-        ARTICLE 5 :
-        Cookies
-    </span>
-</h1>
-
-<p>
-    <span>
-        L’Utilisateur est informé
-        que lors de ses visites sur le site, un cookie peut s’installer automatiquement
-        sur son logiciel de navigation.
-    </span>
-</p>
-
-<p>
-    <span>
-        En naviguant sur le site,
-        il les accepte.
-    </span>
-</p>
-
-<p>
-    <span>
-        Un cookie est un élément
-        qui ne permet pas d’identifier l’Utilisateur mais sert à enregistrer des
-        informations relatives à la navigation de celui-ci sur le site Internet.
-        L’Utilisateur pourra désactiver ce cookie par l’intermédiaire des paramètres
-        figurant au sein de son logiciel de navigation.
-    </span>
-</p>
-
-<p><span>&nbsp;</span></p>
-
-<h1>
-    <span>
-        ARTICLE 6 :
-        Propriété intellectuelle
-    </span>
-</h1>
-
-<p>
-    <span>
-        Toute utilisation,
-        reproduction, diffusion, commercialisation, modification de toute ou partie du
-        site <i>www.naopro.net</i>, sans
-        autorisation de l’Editeur est prohibée et pourra entraînée des actions et
-        poursuites judiciaires telles que notamment prévues par le Code de la propriété
-        intellectuelle et le Code civil.
-    </span>
-</p>
-
-<p><span>&nbsp;</span></p>
-
-<p><span>&nbsp;</span></p>
-
-<p>
-    <span>
-        Réalisé sur
-        https://www.legalplace.fr
-    </span>
-</p>
-
-<p>
-    <span>
-        Pour plus d’informations,
-        se reporter aux&nbsp;<i>CGV&nbsp;</i>du site
-        www.naopro.net accessible à la <span>
-            rubrique<i>«</i>
-        </span><i> CGV »&nbsp;</i>
-    </span>
-</p>
+            marker.setMap(map);
+        }
+    </script>
+}
