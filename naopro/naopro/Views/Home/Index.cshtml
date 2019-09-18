@@ -6,6 +6,17 @@
 
 <style>
 
+    /* Always set the map height explicitly to define the size of the div
+     * element that contains the map. */
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+
+    .row {
+        margin-bottom: 20px
+    }
+
     .card-deck {
         margin: 0px;
     }
@@ -20,87 +31,203 @@
     .card-img-top {
         padding: 10px;
     }
+
+    /*.card .card-map {
+        padding-top: 15px;
+        padding-left: 7.5px;
+        padding-right: 7.5px;
+    }*/
 </style>
 
-<div class="card-deck">
-    <div class="card">
-        <img class="card-img-top" src="~/Images/accounting-3190208_640.jpg" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Achat</h5>
-            <div class="card-text">
-                <p>Nous vous accompagnons dans l'acquisition de vos équipements et logiciels informatiques.</p>
-                <p>A partir de votre besoin, nous sélectionnons ensemble les propositions. Puis, nous négocions pour vous les conditions tarifaires.</p>
+<div class="container">
+
+    <div class="row">
+
+        <div class="card-deck">
+            <div class="card">
+                <img class="card-img-top" src="~/Images/accounting-3190208_640.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Achat</h5>
+                    <div class="card-text">
+                        <p>Nous vous accompagnons dans l'acquisition de vos équipements et logiciels informatiques.</p>
+                        <p>A partir de votre besoin, nous sélectionnons ensemble les propositions. Puis, nous négocions pour vous les conditions tarifaires.</p>
+                    </div>
+                </div>
+                <div class="card-footer text-right">
+                    <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">Sur devis<sup><abbr title="@fraisInclus"> (1)</abbr></sup></label></small>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="~/Images/web-design-2038872_640x423.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title" style="">Développement</h5>
+                    <div class="card-text">
+                        <p>Nous réalisons des sites internet sur-mesure.</p>
+                        <p>Après une étude de vos souhaits, nous concevons un site WEB dédié pour répondre au mieux à vos attentes.</p>
+                    </div>
+                </div>
+                <div class="card-footer text-right">
+                    <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">400 euros<sup><abbr title="@tvaNonApplicable"> (2)</abbr></sup> / jour</label></small>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="~/Images/software-development-4165307_640.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Formation</h5>
+                    <div class="card-text">
+                        <p>Nous vous enseignons à devenir autonome sur vos outils informatiques.</p>
+                        <p>Selon vos cas d'utilisation, nous créons un programme adéquate qui vous permettra d'utiliser vos équipements sans aide.</p>
+                    </div>
+                </div>
+                <div class="card-footer text-right">
+                    <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">50 euros<sup><abbr title="@tvaNonApplicable"> (2)</abbr></sup> / heure</label></small>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="card-deck">
+
+            <div class="card">
+                <img class="card-img-top" src="~/Images/computer-3343887_640x423.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Assistance</h5>
+                    <div class="card-text">
+                        <p>Nous vous aidons à résoudre vos problèmes informatiques.</p>
+                        <p>Après analyse des difficultés que vous rencontrez, nous déterminons ensemble la meilleure solution.</p>
+                    </div>
+                </div>
+                <div class="card-footer text-right">
+                    <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">50 euros<sup><abbr title="@tvaNonApplicable"> (2)</abbr></sup> / heure</label></small>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="~/Images/application-3399516_640x423.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Conseil</h5>
+                    <div class="card-text">
+                        <p>Nous vous proposons également des services sur-mesure.</p>
+                        <p>Vous avez un autre besoin, nous pouvons vous guider dans la réalisation de votre projet.</p>
+                    </div>
+                </div>
+                <div class="card-footer text-right">
+                    <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">Sur devis<sup><abbr title="@fraisInclus"> (1)</abbr></sup></label></small>
+                </div>
+            </div>
+            <div class="card border-0">
+                <div class="card-body">
+                    <div class="card-text">
+                        <ul style="list-style:none;padding-left:0;">
+                            <li style="font-style: italic"><small class="text-muted">(1) @fraisInclus</small></li>
+                            <li style="font-style: italic"><small class="text-muted">(2) @tvaNonApplicable</small></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="card-footer text-right">
-            <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">Sur devis<sup><abbr title="@fraisInclus"> (1)</abbr></sup></label></small>
-        </div>
-    </div>
-    <div class="card">
-        <img class="card-img-top" src="~/Images/web-design-2038872_640x423.jpg" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title" style="">Développement</h5>
-            <div class="card-text">
-                <p>Nous réalisons des sites internet sur-mesure.</p>
-                <p>Après une étude de vos souhaits, nous concevons un site WEB dédié pour répondre au mieux à vos attentes.</p>
-            </div>
-        </div>
-        <div class="card-footer text-right">
-            <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">400 euros<sup><abbr title="@tvaNonApplicable"> (2)</abbr></sup> / jour</label></small>
-        </div>
-    </div>
-    <div class="card">
-        <img class="card-img-top" src="~/Images/software-development-4165307_640.jpg" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Formation</h5>
-            <div class="card-text">
-                <p>Nous vous enseignons à devenir autonome sur vos outils informatiques.</p>
-                <p>Selon vos cas d'utilisation, nous créons un programme adéquate qui vous permettra d'utiliser vos équipements sans aide.</p>
-            </div>
-        </div>
-        <div class="card-footer text-right">
-            <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">50 euros<sup><abbr title="@tvaNonApplicable"> (2)</abbr></sup> / heure</label></small>
-        </div>
+
     </div>
 
+    <div class="row">
+        <div class="card-deck w-100">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Zone de déplacement à domicile : Saint-grégoire</h5>
+                    <div id="map" class="card-img-top"></div>
+                    <div class="card-img-top" style="padding-top:20px">
+
+                        <form>
+                            <div class="form-group row">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="">Puis-je en bénéficier</span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="mon adresse ...">
+                                </div>
+                            </div>
+                            <div class="form-group row vw-100 align-content-end">
+                                <button type="submit" class="btn btn-primary mb-2">Vérifier</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="card-deck">
+@section Scripts
+{
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMm968DvdBSqzKuyALgIKxQqUaVfBvxjw&callback=initMap">
+    </script>
+    <script type="text/javascript">
 
-    <div class="card">
-        <img class="card-img-top" src="~/Images/computer-3343887_640x423.jpg" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Assistance</h5>
-            <div class="card-text">
-                <p>Nous vous aidons à résoudre vos problèmes informatiques.</p>
-                <p>Après analyse des difficultés que vous rencontrez, nous déterminons ensemble la meilleure solution.</p>
-            </div>
-        </div>
-        <div class="card-footer text-right">
-            <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">50 euros<sup><abbr title="@tvaNonApplicable"> (2)</abbr></sup> / heure</label></small>
-        </div>
-    </div>
-    <div class="card">
-        <img class="card-img-top" src="~/Images/application-3399516_640x423.jpg" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Conseil</h5>
-            <div class="card-text">
-                <p>Nous vous proposons également des services sur-mesure.</p>
-                <p>Vous avez un autre besoin, nous pouvons vous guider dans la réalisation de votre projet.</p>
-            </div>
-        </div>
-        <div class="card-footer text-right">
-            <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">Sur devis<sup><abbr title="@fraisInclus"> (1)</abbr></sup></label></small>
-        </div>
-    </div>
-    <div class="card border-0"></div>
-</div>
+        // This example creates a simple polygon representing the Bermuda Triangle.
+        // When the user clicks on the polygon an info window opens, showing
+        // information about the polygon's coordinates.
 
-<p>
-    <small class="text-muted">
-        <ul style="list-style:none;padding-left:0;">
-            <li style="font-style: italic">(1) @fraisInclus</li>
-            <li style="font-style: italic">(2) @tvaNonApplicable</li>
-        </ul>
-    </small>
-</p>
+        var map;
+        var infoWindow;
+
+        function initMap() {
+
+            $.getJSON("/polygon-saint-gregoire.json", function (city) {
+
+                map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 12,
+                    center: city.center,
+                    mapTypeId: 'terrain'
+                });
+
+                // Define the LatLng coordinates for the polygon.
+
+                // http://theopenmap.herokuapp.com/api/v2_coordinates/
+                // + body { location:35760+Saint-Grégoire }
+
+                // Construct the polygon.
+                var bermudaTriangle = new google.maps.Polygon({
+                    paths: city.coords,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 3,
+                    fillColor: '#FF0000',
+                    fillOpacity: 0.35
+                });
+                bermudaTriangle.setMap(map);
+
+                // Add a listener for the click event.
+                bermudaTriangle.addListener('click', showArrays);
+
+                infoWindow = new google.maps.InfoWindow;
+
+            });
+
+        }
+
+        /** this {google.maps.Polygon} */
+        function showArrays(event) {
+            // Since this polygon has only one path, we can call getPath() to return the
+            // MVCArray of LatLngs.
+            var vertices = this.getPath();
+
+            var contentString = '<b>Bermuda Triangle polygon</b><br>' +
+                'Clicked location: <br>' + event.latLng.lat() + ',' + event.latLng.lng() +
+                '<br>';
+
+            // Iterate over the vertices.
+            for (var i = 0; i < vertices.getLength(); i++) {
+                var xy = vertices.getAt(i);
+                contentString += '<br>' + 'Coordinate ' + i + ':<br>' + xy.lat() + ',' +
+                    xy.lng();
+            }
+
+            // Replace the info window's content and position.
+            infoWindow.setContent(contentString);
+            infoWindow.setPosition(event.latLng);
+
+            infoWindow.open(map);
+        }
+
+    </script>
+}
