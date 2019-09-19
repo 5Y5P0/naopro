@@ -28,15 +28,15 @@
             margin-right: 7.5px;
         }
 
-    .card-img-top {
+    .card-map-top {
         padding: 10px;
     }
 
-    /*.card .card-map {
-        padding-top: 15px;
-        padding-left: 7.5px;
-        padding-right: 7.5px;
-    }*/
+    .card-map-form {
+        padding: 15px;
+        width: 100%;
+    }
+
 </style>
 
 <div class="container">
@@ -132,21 +132,22 @@
         <div class="card-deck w-100">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Zone de déplacement à domicile : Saint-grégoire</h5>
-                    <div id="map" class="card-img-top"></div>
-                    <div class="card-img-top" style="padding-top:20px">
+                    <h5 class="card-title">Zone de déplacement à domicile : Saint-grégoire (35760)</h5>
+                    <div id="map" class="card-map-top"></div>
+                    <div class="card-map-form">
 
                         <form>
                             <div class="form-group row">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text" id="">Puis-je en bénéficier</span>
+                                        <span class="input-group-text" id="">Mon emplacement</span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="mon adresse ...">
+                                    <input type="text" class="form-control" placeholder="Adresse ...">
                                 </div>
                             </div>
-                            <div class="form-group row vw-100 align-content-end">
-                                <button type="submit" class="btn btn-primary mb-2">Vérifier</button>
+                            <div class="form-group row float-right">
+                                <button type="submit" class="btn btn-primary mb-2">Vérfier mon addresse</button>
+
                             </div>
                         </form>
 
