@@ -127,16 +127,16 @@
 
     </div>
 
-    <div class="row">
+    <div class="row" style="overflow:hidden">
         <div class="card-deck w-100">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Zone de déplacement à domicile : Saint-grégoire (35760)</h5>
                     <div id="map" class="card-map-top"></div>
-                    <div class="card-map-form">
 
-                        <form id="addressForm">
-                            <div class="form-group row">
+                    <form id="addressForm" style="padding:0px;margin:0px;">
+                        <div class="form-row">
+                            <div class="form-group w-100" style="padding: 5px">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="">Mon emplacement</span>
@@ -144,13 +144,29 @@
                                     <input type="text" class="form-control" placeholder="Adresse ...">
                                 </div>
                             </div>
-                            <div class="form-group row float-right">
-                                <button type="submit" class="btn btn-primary mb-2">Vérfier mon addresse</button>
+                        </div>
 
+                        <div class="form-row">
+                            <div class="form-group w-100" style="padding: 5px;">
+                                <button type="submit" class="btn btn-primary mb-2 float-right">Vérifier mon addresse</button>
                             </div>
-                        </form>
+                        </div>
 
-                    </div>
+                        <div class="form-row">
+                            <div class="form-group w-100" style="padding: 5px;">
+                                <span class="align-items-stretch" style="color:green">
+                                    <span class="float-right">
+                                        <i class="fas fa-check" style="border:1px;font-size:1.5em"></i>&nbsp;<label class="font-italic" style="border:1px;vertical-align:middle">Nous pouvons nous déplacer chez vous.</label>
+                                    </span>
+                                </span>
+                                <span class="align-items-stretch float-right" style="color:#FF0000;display:none;">
+                                    <i class="fas fa-check" style="border:1px;font-size:1.5em"></i>&nbsp;<label class="font-italic" style="border:1px;vertical-align:middle">Nous pouvons nous déplacer chez vous.</label>
+                                </span>
+                            </div>
+                        </div>
+
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -176,9 +192,9 @@
                 event.preventDefault();
                 /* fire your validation and $.post */
 
-                var d = $("#addressForm :input")[0].value;
+                var a = $("#addressForm :input")[0].value;
 
-                geocodeAddress(d);
+                displayAddress(a);
 
                 return false;
 
@@ -226,28 +242,27 @@
             markers = [];
         }
 
-        function geocodeAddress(address) {
+        function displayAddress(value) {
 
             $.ajax({
-                url: 'https://api-adresse.data.gouv.fr/search/?q=' + encodeURI(address) + '&limit=1',
+                url: 'https://api-adresse.data.gouv.fr/search/?q=' + encodeURI(value) + '&limit=1',
                 //data: data,
                 processData: false,
                 contentType: false,
                 type: 'GET',
                 success: function (data) {
-                    jsonText = '{"lng": ' + data.features[0].geometry.coordinates[0] + ', "lat": ' + data.features[0].geometry.coordinates[1] + "}";
-                    //alert(jsonText);
-                    coords = JSON.parse(jsonText);
 
-                    deleteMarkers();
-                    addMarker(new google.maps.LatLng(coords.lat, coords.lng));
-                    //var marker = new google.maps.Marker({
-                    //    position: new google.maps.LatLng(coords.lat, coords.lng),
-                    //    title: "Hello World!"
-                    //});
+                    if (data.features[0].geometry.coordinates.length > 0) {
 
-                    //// To add the marker to the map, call setMap();
-                    //marker.setMap(map);
+                        jsonText = '{"lng": ' + data.features[0].geometry.coordinates[0] + ', "lat": ' + data.features[0].geometry.coordinates[1] + "}";
+                        //alert(jsonText);
+                        coords = JSON.parse(jsonText);
+
+                        deleteMarkers();
+                        addMarker(new google.maps.LatLng(coords.lat, coords.lng));
+
+                    }
+
                 },
                 error: function (xhrRequest, status, error) {
                     alert(JSON.stringify(xhrRequest));
@@ -278,7 +293,7 @@
                     strokeOpacity: 0.8,
                     strokeWeight: 3,
                     fillColor: '#FF0000',
-                    fillOpacity: 0.35
+                    fillOpacity: 0.2
                 });
                 bermudaTriangle.setMap(map);
 
