@@ -9,14 +9,14 @@
     /* Always set the map height explicitly to define the size of the div
      * element that contains the map. */
     #map {
-        min-height: 400px;
+        height: 400px;
     }
 
-    .row {
+    /*.row {
         margin-bottom: 20px
-    }
+    }*/
 
-    .card-deck {
+    /*.card-deck {
         margin: 0px;
     }
 
@@ -25,16 +25,16 @@
             margin-top: 15px;
             margin-left: 7.5px;
             margin-right: 7.5px;
-        }
+        }*/
 
-    .card-map-top {
+    /*.card-map-top {
         padding: 10px;
-    }
+    }*/
 
-    .card-map-form {
+    /*.card-map-form {
         padding: 15px;
         width: 100%;
-    }
+    }*/
 </style>
 
 <div class="container">
@@ -128,29 +128,35 @@
 
         </div>
 
+    </div>
 
-    <div class="row">
-               
-        <div class="card-deck">
+    <div class="row" style="margin-top:2em">
 
-            <div class="card">
+        <div class="container">
 
-                <div class="card-body">
-                    <div class="card-title"><h5>Zone de déplacement à domicile : Saint-grégoire (35760)</h5></div>
-                    <div id="map"></div>
-                </div>
+            <div class="row">
 
-                <form class="card-body">
-                    <div class="form-row">
-                        <div class="col-md-12">
+                <h5>Zone de déplacement à domicile : Saint-grégoire (35760)</h5>
+
+            </div>
+
+            <div class="row">
+
+                <div id="map" class="w-100"></div>
+
+            </div>
+
+            <div class="row">
+
+                <form class="w-100">
+                    <div class="form-row" style="margin-top:1em" >
                             <label for="inputLocation">Mon emplacement</label>
                             <input type="text" class="form-control is-valid" id="inputLocation" placeholder="Saisissez votre adresse ..." required>
-                            <div class="valid-feedback">
-                                Looks good!
+                            <div class="valid-feedback" style="overflow-wrap:break-word">
+                                Looks gohgfhgfhfghfghgfhgfhfghfghfghfghgfhod!
                             </div>
-                        </div>
                     </div>
-                    <button class="btn btn-primary" type="submit">Vérifier mon addresse</button>
+                    <button class="btn btn-primary" style="margin-top:1em" type="submit">Vérifier mon addresse</button>
                 </form>
 
             </div>
