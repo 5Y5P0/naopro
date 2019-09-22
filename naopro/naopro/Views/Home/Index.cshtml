@@ -9,8 +9,7 @@
     /* Always set the map height explicitly to define the size of the div
      * element that contains the map. */
     #map {
-        height: 400px;
-        width: 100%;
+        min-height: 400px;
     }
 
     .row {
@@ -127,50 +126,37 @@
 
     </div>
 
-    <div class="row" style="overflow:hidden">
-        <div class="card-deck w-100">
+
+    <div class="row">
+               
+        <div class="card-deck">
+
             <div class="card">
+
                 <div class="card-body">
-                    <h5 class="card-title">Zone de déplacement à domicile : Saint-grégoire (35760)</h5>
-                    <div id="map" class="card-map-top"></div>
-
-                    <form id="addressForm" style="padding:0px;margin:0px;">
-                        <div class="form-row">
-                            <div class="form-group w-100" style="padding: 5px">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="">Mon emplacement</span>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Adresse ...">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group w-100" style="padding: 5px;">
-                                <button type="submit" class="btn btn-primary mb-2 float-right">Vérifier mon addresse</button>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group w-100" style="padding: 5px;">
-                                <span class="align-items-stretch" style="color:green">
-                                    <span class="float-right">
-                                        <i class="fas fa-check" style="border:1px;font-size:1.5em"></i>&nbsp;<label class="font-italic" style="border:1px;vertical-align:middle">Nous pouvons nous déplacer chez vous.</label>
-                                    </span>
-                                </span>
-                                <span class="align-items-stretch float-right" style="color:#FF0000;display:none;">
-                                    <i class="fas fa-check" style="border:1px;font-size:1.5em"></i>&nbsp;<label class="font-italic" style="border:1px;vertical-align:middle">Nous pouvons nous déplacer chez vous.</label>
-                                </span>
-                            </div>
-                        </div>
-
-                    </form>
-
+                    <div class="card-title"><h5>Zone de déplacement à domicile : Saint-grégoire (35760)</h5></div>
+                    <div id="map"></div>
                 </div>
+
+                <form class="card-body">
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <label for="inputLocation">Mon emplacement</label>
+                            <input type="text" class="form-control is-valid" id="inputLocation" placeholder="Saisissez votre adresse ..." required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Vérifier mon addresse</button>
+                </form>
+
             </div>
+
         </div>
+
     </div>
+
 </div>
 
 @section Scripts
