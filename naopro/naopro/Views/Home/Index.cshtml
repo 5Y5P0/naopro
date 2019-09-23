@@ -148,13 +148,11 @@
 
             <div class="row">
 
-                <form class="w-100">
-                    <div class="form-row" style="margin-top:1em" >
-                            <label for="inputLocation">Mon emplacement</label>
-                            <input type="text" class="form-control is-valid" id="inputLocation" placeholder="Saisissez votre adresse ..." required>
-                            <div class="valid-feedback" style="overflow-wrap:break-word">
-                                Looks gohgfhgfhfghfghgfhgfhfghfghfghfghgfhod!
-                            </div>
+                <form id="addressForm" class="w-100">
+                    <div class="form-row" style="margin-top:1em">
+                        <label for="inputLocation">Mon emplacement</label>
+                        <input type="text" class="form-control" id="inputLocation" placeholder="Saisissez votre adresse ici ...">
+                        <div id="feedback" class="hide" style="overflow-wrap:break-word"></div>
                     </div>
                     <button class="btn btn-primary" style="margin-top:1em" type="submit">Vérifier mon addresse</button>
                 </form>
@@ -194,11 +192,76 @@
 
             }
 
+            $("#inputLocation")[0].addEventListener('input', function () {
+
+                this.classList.remove("is-invalid");
+                this.classList.remove("is-valid");
+
+                var feedbackLabel = $('#feedback')[0];
+
+                feedbackLabel.innerText = '';
+                feedbackLabel.classList.add("hide");
+                feedbackLabel.classList.remove("invalid-feedback");
+                feedbackLabel.classList.remove("valid-feedback");
+
+            });
+
         });
 
+        function formKo(message) {
+
+                    var fieldInput = $('#inputLocation')[0];
+
+                    fieldInput.classList.remove("is-valid")
+                    fieldInput.classList.add("is-invalid");
+
+                    var feedbackLabel = $('#feedback')[0];
+
+                    feedbackLabel.innerText = '';
+                    feedbackLabel.classList.remove("hide")
+                    feedbackLabel.classList.remove("valid-feedback")
+                    feedbackLabel.classList.add("invalid-feedback")
+                    feedbackLabel.append(message);
+
+        }
+
+        function formOk() {
+                                var fieldInput = $('#inputLocation')[0];
+
+                    fieldInput.classList.remove("is-invalid");
+                    fieldInput.classList.add("is-valid");
+
+                    var feedbackLabel = $('#feedback')[0];
+
+                    feedbackLabel.innerText = '';
+                    feedbackLabel.classList.remove("hide");
+                    feedbackLabel.classList.remove("invalid-feedback");
+                    feedbackLabel.classList.add("valid-feedback");
+                    feedbackLabel.append("Nous pouvons nous déplacer à votre adresse.");
+        }
+
         function isInPolygon(e) {
-            var coordinate = new google.maps.LatLng(e.lat, e.lng);
-            return google.maps.geometry.poly.containsLocation(coordinate, yourPolygon);
+
+            $.getJSON("/polygon-saint-gregoire.json", function (city) {
+
+                var coordinate = new google.maps.LatLng(e.lat, e.lng);
+                var polygon = new google.maps.Polygon({paths: city.coords});
+                isIn = google.maps.geometry.poly.containsLocation(coordinate, polygon);
+
+                deleteMarkers();
+                addMarker(coordinate);
+
+                if (isIn) {
+
+                    formOk();
+
+                } else {
+
+                    formKo("Cette adresse se trouve en dehors de notre zone d'activité.");
+                }
+
+            });
+
         }
 
         // Adds a marker to the map and push to the array.
@@ -207,7 +270,7 @@
                 position: location,
                 map: map,
                 icon: {
-                    url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                    url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
                 }
             });
             markers.push(marker);
@@ -239,27 +302,38 @@
         function displayAddress(value) {
 
             $.ajax({
-                url: 'https://api-adresse.data.gouv.fr/search/?q=' + encodeURI(value) + '&limit=1',
+                url: 'https://api-adresse.data.gouv.fr/search/?q=' + encodeURI(value) + '&limit=2',
                 //data: data,
                 processData: false,
                 contentType: false,
                 type: 'GET',
                 success: function (data) {
 
-                    if (data.features[0].geometry.coordinates.length > 0) {
+                    coordinates = data.features;
 
-                        jsonText = '{"lng": ' + data.features[0].geometry.coordinates[0] + ', "lat": ' + data.features[0].geometry.coordinates[1] + "}";
+                    if (coordinates.length > 1) {
+
+                        formKo("Nous trouvons plusieurs correspondances, pourriez-vous apporter des precisions à votre adresse.");
+
+                    } else if (coordinates.length == 1) {
+
+                        jsonText = '{"lng": ' + coordinates[0].geometry.coordinates[0] + ', "lat": ' + coordinates[0].geometry.coordinates[1] + "}";
                         //alert(jsonText);
                         coords = JSON.parse(jsonText);
 
-                        deleteMarkers();
-                        addMarker(new google.maps.LatLng(coords.lat, coords.lng));
+                        isInPolygon(coords);
+
+                    } else {
+
+                        formKo("Cette adresse se trouve en dehors de notre zone d'activité.");
 
                     }
 
                 },
                 error: function (xhrRequest, status, error) {
-                    alert(JSON.stringify(xhrRequest));
+
+                    formKo("Une erreur s'est produite lors de la localisaton.");
+
                 }
             });
 
@@ -281,7 +355,7 @@
                 // + body { location:35760+Saint-Grégoire }
 
                 // Construct the polygon.
-                var bermudaTriangle = new google.maps.Polygon({
+                var mapZone = new google.maps.Polygon({
                     paths: city.coords,
                     strokeColor: '#FF0000',
                     strokeOpacity: 0.8,
@@ -289,10 +363,10 @@
                     fillColor: '#FF0000',
                     fillOpacity: 0.2
                 });
-                bermudaTriangle.setMap(map);
+                mapZone.setMap(map);
 
                 // Add a listener for the click event.
-                bermudaTriangle.addListener('click', showArrays);
+                mapZone.addListener('click', showArrays);
 
                 infoWindow = new google.maps.InfoWindow;
 
