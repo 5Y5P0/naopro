@@ -165,6 +165,32 @@
 
 </div>
 
+<!-- The Modal -->
+<div class="modal" id="addressesModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Choix possibles</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <ul id="addressesList">
+                </ul>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 @section Scripts
 {
     @*key=AIzaSyAMm968DvdBSqzKuyALgIKxQqUaVfBvxjw&*@
@@ -210,34 +236,34 @@
 
         function formKo(message) {
 
-                    var fieldInput = $('#inputLocation')[0];
+            var fieldInput = $('#inputLocation')[0];
 
-                    fieldInput.classList.remove("is-valid")
-                    fieldInput.classList.add("is-invalid");
+            fieldInput.classList.remove("is-valid")
+            fieldInput.classList.add("is-invalid");
 
-                    var feedbackLabel = $('#feedback')[0];
+            var feedbackLabel = $('#feedback')[0];
 
-                    feedbackLabel.innerText = '';
-                    feedbackLabel.classList.remove("hide")
-                    feedbackLabel.classList.remove("valid-feedback")
-                    feedbackLabel.classList.add("invalid-feedback")
-                    feedbackLabel.append(message);
+            feedbackLabel.innerText = '';
+            feedbackLabel.classList.remove("hide")
+            feedbackLabel.classList.remove("valid-feedback")
+            feedbackLabel.classList.add("invalid-feedback")
+            feedbackLabel.append(message);
 
         }
 
         function formOk() {
-                                var fieldInput = $('#inputLocation')[0];
+            var fieldInput = $('#inputLocation')[0];
 
-                    fieldInput.classList.remove("is-invalid");
-                    fieldInput.classList.add("is-valid");
+            fieldInput.classList.remove("is-invalid");
+            fieldInput.classList.add("is-valid");
 
-                    var feedbackLabel = $('#feedback')[0];
+            var feedbackLabel = $('#feedback')[0];
 
-                    feedbackLabel.innerText = '';
-                    feedbackLabel.classList.remove("hide");
-                    feedbackLabel.classList.remove("invalid-feedback");
-                    feedbackLabel.classList.add("valid-feedback");
-                    feedbackLabel.append("Nous pouvons nous déplacer à votre adresse.");
+            feedbackLabel.innerText = '';
+            feedbackLabel.classList.remove("hide");
+            feedbackLabel.classList.remove("invalid-feedback");
+            feedbackLabel.classList.add("valid-feedback");
+            feedbackLabel.append("Nous pouvons nous déplacer à votre adresse.");
         }
 
         function isInPolygon(e) {
@@ -245,7 +271,7 @@
             $.getJSON("/polygon-saint-gregoire.json", function (city) {
 
                 var coordinate = new google.maps.LatLng(e.lat, e.lng);
-                var polygon = new google.maps.Polygon({paths: city.coords});
+                var polygon = new google.maps.Polygon({ paths: city.coords });
                 isIn = google.maps.geometry.poly.containsLocation(coordinate, polygon);
 
                 deleteMarkers();
@@ -313,7 +339,29 @@
 
                     if (coordinates.length > 1) {
 
+                        $('#addressesList').empty();
+
+                        $.each(coordinates, function (index, value) {
+
+                            $('#addressesList').append(
+
+                                $('<li>').append(
+
+                                    $('<label>').text(value.properties.label)
+
+                                ).append(
+
+                                    $('<a>').attr('class', 'float-right').attr('href', '/user/messages').text('Sélectionner')
+
+                                )
+
+                            )
+
+                        });
+                        
                         formKo("Nous trouvons plusieurs correspondances, pourriez-vous apporter des precisions à votre adresse.");
+
+                        $('#addressesModal').modal({ keyboard: false });
 
                     } else if (coordinates.length == 1) {
 
