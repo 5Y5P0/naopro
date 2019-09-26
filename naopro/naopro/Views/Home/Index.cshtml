@@ -173,7 +173,6 @@
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">Choix possibles</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- Modal body -->
@@ -210,9 +209,7 @@
                 event.preventDefault();
                 /* fire your validation and $.post */
 
-                var a = $("#addressForm :input")[0].value;
-
-                displayAddress(a);
+                searchAddress();
 
                 return false;
 
@@ -324,11 +321,13 @@
             clearMarkers();
             markers = [];
         }
+        
+        function searchAddress() {
 
-        function displayAddress(value) {
+            let address = $("#addressForm :input")[0].value;
 
             $.ajax({
-                url: 'https://api-adresse.data.gouv.fr/search/?q=' + encodeURI(value) + '&limit=2',
+                url: 'https://api-adresse.data.gouv.fr/search/?q=' + encodeURI(address),// + '&limit=2',
                 //data: data,
                 processData: false,
                 contentType: false,
@@ -343,6 +342,11 @@
 
                         $.each(coordinates, function (index, value) {
 
+                            let jsonObj = { lng: value.geometry.coordinates[0], lat: value.geometry.coordinates[1] };
+                            
+                            localStorage.setItem(index, JSON.stringify(jsonObj));
+                            //var obj2 = JSON.parse(localStorage.getItem('myObj'));
+
                             $('#addressesList').append(
 
                                 $('<li>').append(
@@ -351,14 +355,24 @@
 
                                 ).append(
 
-                                    $('<a>').attr('class', 'float-right').attr('href', '/user/messages').text('Sélectionner')
+                                    $('<a>').attr('class', 'float-right').attr('href', '#').click(function () {
+
+                                        event.preventDefault();
+
+                                        $("#addressForm :input")[0].value = value.properties.label;
+
+                                        isInPolygon(jsonObj);
+
+                                        $(".modal-footer > button[data-dismiss='modal']").trigger("click");
+
+                                    }).text('Sélectionner')
 
                                 )
 
                             )
 
                         });
-                        
+
                         formKo("Nous trouvons plusieurs correspondances, pourriez-vous apporter des precisions à votre adresse.");
 
                         $('#addressesModal').modal({ keyboard: false });
@@ -414,37 +428,37 @@
                 mapZone.setMap(map);
 
                 // Add a listener for the click event.
-                mapZone.addListener('click', showArrays);
+                // mapZone.addListener('click', showArrays);
 
-                infoWindow = new google.maps.InfoWindow;
+                //infoWindow = new google.maps.InfoWindow;
 
             });
 
         }
 
-        /** this {google.maps.Polygon} */
-        function showArrays(event) {
-            // Since this polygon has only one path, we can call getPath() to return the
-            // MVCArray of LatLngs.
-            var vertices = this.getPath();
+        ///** this {google.maps.Polygon} */
+        //function showArrays(event) {
+        //    // Since this polygon has only one path, we can call getPath() to return the
+        //    // MVCArray of LatLngs.
+        //    var vertices = this.getPath();
 
-            var contentString = '<b>Bermuda Triangle polygon</b><br>' +
-                'Clicked location: <br>' + event.latLng.lat() + ',' + event.latLng.lng() +
-                '<br>';
+        //    var contentString = '<b>Bermuda Triangle polygon</b><br>' +
+        //        'Clicked location: <br>' + event.latLng.lat() + ',' + event.latLng.lng() +
+        //        '<br>';
 
-            // Iterate over the vertices.
-            for (var i = 0; i < vertices.getLength(); i++) {
-                var xy = vertices.getAt(i);
-                contentString += '<br>' + 'Coordinate ' + i + ':<br>' + xy.lat() + ',' +
-                    xy.lng();
-            }
+        //    // Iterate over the vertices.
+        //    for (var i = 0; i < vertices.getLength(); i++) {
+        //        var xy = vertices.getAt(i);
+        //        contentString += '<br>' + 'Coordinate ' + i + ':<br>' + xy.lat() + ',' +
+        //            xy.lng();
+        //    }
 
-            // Replace the info window's content and position.
-            infoWindow.setContent(contentString);
-            infoWindow.setPosition(event.latLng);
+        //    // Replace the info window's content and position.
+        //    infoWindow.setContent(contentString);
+        //    infoWindow.setPosition(event.latLng);
 
-            infoWindow.open(map);
-        }
+        //    infoWindow.open(map);
+        //}
 
     </script>
 }
