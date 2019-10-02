@@ -12,29 +12,53 @@
         height: 400px;
     }
 
-    /*.row {
-        margin-bottom: 20px
-    }*/
-
-    /*.card-deck {
-        margin: 0px;
+    #locationField, #controls {
+        position: relative;
+        width: 480px;
     }
 
-        .card-deck .card {
-            margin-bottom: 0px;
-            margin-top: 15px;
-            margin-left: 7.5px;
-            margin-right: 7.5px;
-        }*/
-
-    /*.card-map-top {
-        padding: 10px;
+    /*#autocomplete {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 99%;
     }*/
 
-    /*.card-map-form {
-        padding: 15px;
-        width: 100%;
-    }*/
+    .label {
+        text-align: right;
+        font-weight: bold;
+        width: 100px;
+        color: #303030;
+        font-family: "Roboto";
+    }
+
+    #address {
+        border: 1px solid #000090;
+        background-color: #f0f9ff;
+        width: 480px;
+        padding-right: 2px;
+    }
+
+        #address td {
+            font-size: 10pt;
+        }
+
+    .field {
+        width: 99%;
+    }
+
+    .slimField {
+        width: 80px;
+    }
+
+    .wideField {
+        width: 200px;
+    }
+
+    #locationField {
+        height: 20px;
+        margin-bottom: 2px;
+    }
 </style>
 
 <div class="container">
@@ -150,8 +174,8 @@
 
                 <form id="addressForm" class="w-100">
                     <div class="form-row" style="margin-top:1em">
-                        <label for="inputLocation">Mon emplacement</label>
-                        <input type="text" class="form-control" id="inputLocation" placeholder="Saisissez votre adresse ici ...">
+                        <label for="autocomplete">Mon emplacement</label>
+                        <input type="text" class="form-control" id="autocomplete" onFocus="geolocate()" placeholder="Saisissez votre adresse ici ...">
                         <div id="feedback" class="hide" style="overflow-wrap:break-word"></div>
                     </div>
                     <button class="btn btn-primary" style="margin-top:1em" type="submit">Vérifier mon addresse</button>
@@ -192,14 +216,22 @@
 
 @section Scripts
 {
-    @*key=AIzaSyAMm968DvdBSqzKuyALgIKxQqUaVfBvxjw&*@
-    <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=geometry">
-    </script>
+
     <script type="text/javascript">
+
+        var componentForm = {
+            street_number: 'short_name',
+            route: 'long_name',
+            locality: 'long_name',
+            administrative_area_level_1: 'short_name',
+            country: 'long_name',
+            postal_code: 'short_name'
+        };
 
         var map;
         var markers = [];
         var infoWindow;
+        var placeSearch, autocomplete;
 
         $(document).ready(function () {
 
@@ -215,21 +247,72 @@
 
             }
 
-            $("#inputLocation")[0].addEventListener('input', function () {
+            //$("#inputLocation")[0].addEventListener('input', function () {
 
-                this.classList.remove("is-invalid");
-                this.classList.remove("is-valid");
+            //    this.classList.remove("is-invalid");
+            //    this.classList.remove("is-valid");
 
-                var feedbackLabel = $('#feedback')[0];
+            //    var feedbackLabel = $('#feedback')[0];
 
-                feedbackLabel.innerText = '';
-                feedbackLabel.classList.add("hide");
-                feedbackLabel.classList.remove("invalid-feedback");
-                feedbackLabel.classList.remove("valid-feedback");
+            //    feedbackLabel.innerText = '';
+            //    feedbackLabel.classList.add("hide");
+            //    feedbackLabel.classList.remove("invalid-feedback");
+            //    feedbackLabel.classList.remove("valid-feedback");
 
-            });
+            //});
 
         });
+
+        function initAutocomplete() {
+            // Create the autocomplete object, restricting the search predictions to
+            // geographical location types.
+            autocomplete = new google.maps.places.Autocomplete(
+                document.getElementById('autocomplete'), { types: ['geocode'] });
+
+            // Avoid paying for data that you don't need by restricting the set of
+            // place fields that are returned to just the address components.
+            autocomplete.setFields(['address_component']);
+
+            // When the user selects an address from the drop-down, populate the
+            // address fields in the form.
+            autocomplete.addListener('place_changed', fillInAddress);
+        }
+
+        function fillInAddress() {
+            // Get the place details from the autocomplete object.
+            var place = autocomplete.getPlace();
+
+            for (var component in componentForm) {
+                document.getElementById(component).value = '';
+                document.getElementById(component).disabled = false;
+            }
+
+            // Get each component of the address from the place details,
+            // and then fill-in the corresponding field on the form.
+            for (var i = 0; i < place.address_components.length; i++) {
+                var addressType = place.address_components[i].types[0];
+                if (componentForm[addressType]) {
+                    var val = place.address_components[i][componentForm[addressType]];
+                    document.getElementById(addressType).value = val;
+                }
+            }
+        }
+
+        // Bias the autocomplete object to the user's geographical location,
+        // as supplied by the browser's 'navigator.geolocation' object.
+        function geolocate() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var geolocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    var circle = new google.maps.Circle(
+                        { center: geolocation, radius: position.coords.accuracy });
+                    autocomplete.setBounds(circle.getBounds());
+                });
+            }
+        }
 
         function formKo(message) {
 
@@ -321,7 +404,7 @@
             clearMarkers();
             markers = [];
         }
-        
+
         function searchAddress() {
 
             let address = $("#addressForm :input")[0].value;
@@ -343,7 +426,7 @@
                         $.each(coordinates, function (index, value) {
 
                             let jsonObj = { lng: value.geometry.coordinates[0], lat: value.geometry.coordinates[1] };
-                            
+
                             localStorage.setItem(index, JSON.stringify(jsonObj));
                             //var obj2 = JSON.parse(localStorage.getItem('myObj'));
 
@@ -401,6 +484,14 @@
 
         }
 
+        function initJs() {
+
+            initMap();
+
+            initAutocomplete();
+
+        }
+
         function initMap() {
 
             $.getJSON("/polygon-saint-gregoire.json", function (city) {
@@ -436,29 +527,10 @@
 
         }
 
-        ///** this {google.maps.Polygon} */
-        //function showArrays(event) {
-        //    // Since this polygon has only one path, we can call getPath() to return the
-        //    // MVCArray of LatLngs.
-        //    var vertices = this.getPath();
-
-        //    var contentString = '<b>Bermuda Triangle polygon</b><br>' +
-        //        'Clicked location: <br>' + event.latLng.lat() + ',' + event.latLng.lng() +
-        //        '<br>';
-
-        //    // Iterate over the vertices.
-        //    for (var i = 0; i < vertices.getLength(); i++) {
-        //        var xy = vertices.getAt(i);
-        //        contentString += '<br>' + 'Coordinate ' + i + ':<br>' + xy.lat() + ',' +
-        //            xy.lng();
-        //    }
-
-        //    // Replace the info window's content and position.
-        //    infoWindow.setContent(contentString);
-        //    infoWindow.setPosition(event.latLng);
-
-        //    infoWindow.open(map);
-        //}
-
     </script>
+
+    @*key=AIzaSyAMm968DvdBSqzKuyALgIKxQqUaVfBvxjw&*@
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAMm968DvdBSqzKuyALgIKxQqUaVfBvxjw&callback=initJs&libraries=geometry,places">
+    </script>
+
 }
