@@ -442,7 +442,7 @@
                 map.on('load', function () {
 
                     map.addLayer({
-                        'id': 'maine',
+                        'id': 'saintGregoireSurface',
                         'type': 'fill',
                         'source': {
                             'type': 'geojson',
@@ -461,6 +461,31 @@
                             'fill-opacity': 0.2
                         }
                     });
+
+                                        map.addLayer({
+                        "id": "saintGregoirePerimeter",
+                        "type": "line",
+                        "source": {
+                            "type": "geojson",
+                            "data": {
+                                "type": "Feature",
+                                "properties": {},
+                                "geometry": {
+                                    "type": "LineString",
+                                    "coordinates": coords
+                                }
+                            }
+                        },
+                        "layout": {
+                            "line-join": "round",
+                            "line-cap": "round"
+                        },
+                        "paint": {
+                            "line-color": "#FF0000",
+                            "line-width": 1
+                        }
+                    });
+
                 });
 
             });
