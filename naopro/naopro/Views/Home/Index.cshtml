@@ -180,7 +180,7 @@
 
             <div class="row w-100 parentMap" style="padding:0px;margin:0px">
 
-                <div id="map" class="w-100" style="padding:0px;margin:0px"></div>
+                <div id="map" class="w-100" style="padding:0px;margin:0px;border:2px solid transparent"></div>
                 <div id='geocoder' class='geocoder'></div>
 
             </div>
@@ -188,12 +188,12 @@
             <div class="row">
 
                 <form id="addressForm" class="w-100">
-                    <div class="form-row" style="margin-top:1em">
-                        <label for="inputLocation">Mon emplacement</label>
-                        <input type="text" class="form-control" id="inputLocation" placeholder="Saisissez votre adresse ici ...">
-                        <div id="feedback" class="hide" style="overflow-wrap:break-word"></div>
+                    <div class="form-row" style="margin-top:1em;height:2rem">
+                        @*<label for="inputLocation">Mon emplacement</label>
+                        <input type="text" class="form-control" id="inputLocation" placeholder="Saisissez votre adresse ici ...">*@
+                        <label id="feedback" class="hide" style="overflow-wrap:break-word"></label>
                     </div>
-                    <button class="btn btn-primary" style="margin-top:1em" type="submit">Vérifier mon addresse</button>
+                    @*<button class="btn btn-primary" style="margin-top:1em" type="submit">Vérifier mon addresse</button>*@
                 </form>
 
             </div>
@@ -239,6 +239,8 @@
         var markers = [];
         var infoWindow;
 
+
+
         $(document).ready(function () {
 
             initMap();
@@ -255,28 +257,28 @@
 
             }
 
-            $("#inputLocation")[0].addEventListener('input', function () {
+            //$("#inputLocation")[0].addEventListener('input', function () {
 
-                this.classList.remove("is-invalid");
-                this.classList.remove("is-valid");
+            //    this.classList.remove("is-invalid");
+            //    this.classList.remove("is-valid");
 
-                var feedbackLabel = $('#feedback')[0];
+            //    var feedbackLabel = $('#feedback')[0];
 
-                feedbackLabel.innerText = '';
-                feedbackLabel.classList.add("hide");
-                feedbackLabel.classList.remove("invalid-feedback");
-                feedbackLabel.classList.remove("valid-feedback");
+            //    feedbackLabel.innerText = '';
+            //    feedbackLabel.classList.add("hide");
+            //    feedbackLabel.classList.remove("invalid-feedback");
+            //    feedbackLabel.classList.remove("valid-feedback");
 
-            });
+            //});
 
         });
 
         function formKo(message) {
 
-            var fieldInput = $('#inputLocation')[0];
+            //var fieldInput = $('#inputLocation')[0];
 
-            fieldInput.classList.remove("is-valid")
-            fieldInput.classList.add("is-invalid");
+            //fieldInput.classList.remove("is-valid")
+            //fieldInput.classList.add("is-invalid");
 
             var feedbackLabel = $('#feedback')[0];
 
@@ -286,13 +288,15 @@
             feedbackLabel.classList.add("invalid-feedback")
             feedbackLabel.append(message);
 
+            $('#map').css('border-color', 'red');
+
         }
 
         function formOk() {
-            var fieldInput = $('#inputLocation')[0];
+            //var fieldInput = $('#inputLocation')[0];
 
-            fieldInput.classList.remove("is-invalid");
-            fieldInput.classList.add("is-valid");
+            //fieldInput.classList.remove("is-invalid");
+            //fieldInput.classList.add("is-valid");
 
             var feedbackLabel = $('#feedback')[0];
 
@@ -301,20 +305,22 @@
             feedbackLabel.classList.remove("invalid-feedback");
             feedbackLabel.classList.add("valid-feedback");
             feedbackLabel.append("Nous pouvons nous déplacer à votre adresse.");
+
+            $('#map').css('border-color', 'green');
         }
 
-        function isInPolygon(e) {
+        function isInPolygon(point) {
 
             $.getJSON("/polygon-saint-gregoire.json", function (city) {
+                var coords = [];
+                $.each(city.coords, function (i, value) {
+                    coords[i] = [value.lng, value.lat];
+                });
 
-                var coordinate = new google.maps.LatLng(e.lat, e.lng);
-                var polygon = new google.maps.Polygon({ paths: city.coords });
-                isIn = google.maps.geometry.poly.containsLocation(coordinate, polygon);
+                var pt = turf.point(point);
+                var poly = turf.polygon([coords]);
 
-                deleteMarkers();
-                addMarker(coordinate);
-
-                if (isIn) {
+                if (turf.booleanPointInPolygon(pt, poly)) {
 
                     formOk();
 
@@ -324,6 +330,8 @@
                 }
 
             });
+
+
 
         }
 
@@ -360,85 +368,6 @@
         function deleteMarkers() {
             clearMarkers();
             markers = [];
-        }
-
-        function searchAddress() {
-
-            let address = $("#addressForm :input")[0].value;
-
-            $.ajax({
-                url: 'https://api-adresse.data.gouv.fr/search/?q=' + encodeURI(address),// + '&limit=2',
-                //data: data,
-                processData: false,
-                contentType: false,
-                type: 'GET',
-                success: function (data) {
-
-                    coordinates = data.features;
-
-                    if (coordinates.length > 1) {
-
-                        $('#addressesList').empty();
-
-                        $.each(coordinates, function (index, value) {
-
-                            let jsonObj = { lng: value.geometry.coordinates[0], lat: value.geometry.coordinates[1] };
-
-                            localStorage.setItem(index, JSON.stringify(jsonObj));
-                            //var obj2 = JSON.parse(localStorage.getItem('myObj'));
-
-                            $('#addressesList').append(
-
-                                $('<li>').append(
-
-                                    $('<label>').text(value.properties.label)
-
-                                ).append(
-
-                                    $('<a>').attr('class', 'float-right').attr('href', '#').click(function () {
-
-                                        event.preventDefault();
-
-                                        $("#addressForm :input")[0].value = value.properties.label;
-
-                                        isInPolygon(jsonObj);
-
-                                        $(".modal-footer > button[data-dismiss='modal']").trigger("click");
-
-                                    }).text('Sélectionner')
-
-                                )
-
-                            )
-
-                        });
-
-                        formKo("Nous trouvons plusieurs correspondances, pourriez-vous apporter des precisions à votre adresse.");
-
-                        $('#addressesModal').modal({ keyboard: false });
-
-                    } else if (coordinates.length == 1) {
-
-                        jsonText = '{"lng": ' + coordinates[0].geometry.coordinates[0] + ', "lat": ' + coordinates[0].geometry.coordinates[1] + "}";
-                        //alert(jsonText);
-                        coords = JSON.parse(jsonText);
-
-                        isInPolygon(coords);
-
-                    } else {
-
-                        formKo("Cette adresse se trouve en dehors de notre zone d'activité.");
-
-                    }
-
-                },
-                error: function (xhrRequest, status, error) {
-
-                    formKo("Une erreur s'est produite lors de la localisaton.");
-
-                }
-            });
-
         }
 
         function initMap() {
@@ -520,6 +449,23 @@
                 // Add zoom and rotation controls to the map.
                 map.addControl(new mapboxgl.NavigationControl());
 
+                map.on('move', function (event) {
+                    //if (event.originalEvent) {
+                    console.log('A human moved the map');
+                    //}
+                });
+
+                // Listen for the `result` event from the Geocoder
+                // `result` event is triggered when a user makes a selection
+                //  Add a marker at the result's coordinates
+                geocoder.on('result', function (e) {
+                    //map.getSource('single-point').setData(e.result.geometry);
+                    console.log('A search: 0=>' + e.result.center[0] + '1=>' + e.result.center[1]);
+                    isInPolygon(e.result.center);
+                });
+
+
+
             });
 
         }
@@ -528,5 +474,10 @@
 
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.js'></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js'></script>
+    <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+    <script src='https://npmcdn.com/@@turf/turf/turf.min.js'></script>
+
 
 }
