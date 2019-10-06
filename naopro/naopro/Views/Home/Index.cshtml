@@ -72,6 +72,14 @@
     .mapboxgl-ctrl-geocoder {
         min-width: 100%;
     }
+
+    .popup-ko {
+        color: red;
+    }
+
+    .popup-ok {
+        color: forestgreen;
+    }
 </style>
 
 
@@ -185,19 +193,6 @@
 
             </div>
 
-            <div class="row">
-
-                <form id="addressForm" class="w-100">
-                    <div class="form-row" style="margin-top:1em;height:2rem">
-                        @*<label for="inputLocation">Mon emplacement</label>
-                        <input type="text" class="form-control" id="inputLocation" placeholder="Saisissez votre adresse ici ...">*@
-                        <label id="feedback" class="hide" style="overflow-wrap:break-word"></label>
-                    </div>
-                    @*<button class="btn btn-primary" style="margin-top:1em" type="submit">Vérifier mon addresse</button>*@
-                </form>
-
-            </div>
-
         </div>
 
     </div>
@@ -236,78 +231,14 @@
 
         accessToken = 'pk.eyJ1IjoibmFvcHJvIiwiYSI6ImNrMTlyYmVzbjAxOGQzbnBpdmhrbnl2YmEifQ.qpxklqHmxVQEYXpGsrO09Q';
         var map;
-        var markers = [];
+        var popup;
         var infoWindow;
-
-
 
         $(document).ready(function () {
 
             initMap();
 
-            var form = $('#addressForm')[0];
-            form.onsubmit = function (e) {
-
-                event.preventDefault();
-                /* fire your validation and $.post */
-
-                searchAddress();
-
-                return false;
-
-            }
-
-            //$("#inputLocation")[0].addEventListener('input', function () {
-
-            //    this.classList.remove("is-invalid");
-            //    this.classList.remove("is-valid");
-
-            //    var feedbackLabel = $('#feedback')[0];
-
-            //    feedbackLabel.innerText = '';
-            //    feedbackLabel.classList.add("hide");
-            //    feedbackLabel.classList.remove("invalid-feedback");
-            //    feedbackLabel.classList.remove("valid-feedback");
-
-            //});
-
         });
-
-        function formKo(message) {
-
-            //var fieldInput = $('#inputLocation')[0];
-
-            //fieldInput.classList.remove("is-valid")
-            //fieldInput.classList.add("is-invalid");
-
-            var feedbackLabel = $('#feedback')[0];
-
-            feedbackLabel.innerText = '';
-            feedbackLabel.classList.remove("hide")
-            feedbackLabel.classList.remove("valid-feedback")
-            feedbackLabel.classList.add("invalid-feedback")
-            feedbackLabel.append(message);
-
-            $('#map').css('border-color', 'red');
-
-        }
-
-        function formOk() {
-            //var fieldInput = $('#inputLocation')[0];
-
-            //fieldInput.classList.remove("is-invalid");
-            //fieldInput.classList.add("is-valid");
-
-            var feedbackLabel = $('#feedback')[0];
-
-            feedbackLabel.innerText = '';
-            feedbackLabel.classList.remove("hide");
-            feedbackLabel.classList.remove("invalid-feedback");
-            feedbackLabel.classList.add("valid-feedback");
-            feedbackLabel.append("Nous pouvons nous déplacer à votre adresse.");
-
-            $('#map').css('border-color', 'green');
-        }
 
         function isInPolygon(point) {
 
@@ -320,54 +251,50 @@
                 var pt = turf.point(point);
                 var poly = turf.polygon([coords]);
 
-                if (turf.booleanPointInPolygon(pt, poly)) {
+                try {
 
-                    formOk();
+                    var markerHeight = 50, markerRadius = 10, linearOffset = 25;
+                    var popupOffsets = {
+                        'top': [0, 0],
+                        'top-left': [0, 0],
+                        'top-right': [0, 0],
+                        'bottom': [0, -markerHeight],
+                        'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+                        'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+                        'left': [markerRadius, (markerHeight - markerRadius) * -1],
+                        'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+                    };
 
-                } else {
+                    var messageHtml;
 
-                    formKo("Cette adresse se trouve en dehors de notre zone d'activité.");
+                    if (turf.booleanPointInPolygon(pt, poly)) {
+
+                        message = 'Nous pouvons nous déplacer à votre adresse.';
+                        popupClass = 'popup-ok';
+
+                    } else {
+
+                        console.error('KO');
+                        popupClass = 'popup-ko';
+
+                    }
+
+                    popup = new mapboxgl.Popup({ offset: popupOffsets, className: popupClass })
+                        .setLngLat(point)
+                        .setHTML(messageHtml)
+                        .setMaxWidth("300px")
+                        .addTo(map);
+
+                } catch (error) {
+                    console.error(error);
+                    // expected output: ReferenceError: nonExistentFunction is not defined
+                    // Note - error messages will vary depending on browser
                 }
 
             });
 
 
 
-        }
-
-        // Adds a marker to the map and push to the array.
-        function addMarker(location) {
-            var marker = new google.maps.Marker({
-                position: location,
-                map: map,
-                icon: {
-                    url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-                }
-            });
-            markers.push(marker);
-        }
-
-        // Sets the map on all markers in the array.
-        function setMapOnAll(map) {
-            for (var i = 0; i < markers.length; i++) {
-                markers[i].setMap(map);
-            }
-        }
-
-        // Removes the markers from the map, but keeps them in the array.
-        function clearMarkers() {
-            setMapOnAll(null);
-        }
-
-        // Shows any markers currently in the array.
-        function showMarkers() {
-            setMapOnAll(map);
-        }
-
-        // Deletes all markers in the array by removing references to them.
-        function deleteMarkers() {
-            clearMarkers();
-            markers = [];
         }
 
         function initMap() {
@@ -381,7 +308,7 @@
                 });
 
                 mapboxgl.accessToken = accessToken;
-                var map = new mapboxgl.Map({
+                map = new mapboxgl.Map({
                     container: 'map',
                     style: 'mapbox://styles/mapbox/streets-v11',
                     center: [city.center.lng, city.center.lat + 0.004],
@@ -407,7 +334,7 @@
                         'paint': {
                             'fill-outline-color': 'rgba(200, 200, 200, 1)',
                             'fill-color': '#FF0000',
-                            'fill-opacity': 0.2
+                            'fill-opacity': 0.1
                         }
                     });
 
@@ -431,7 +358,7 @@
                         },
                         "paint": {
                             "line-color": "#FF0000",
-                            "line-width": 1
+                            "line-width": 0.8
                         }
                     });
 
@@ -459,8 +386,8 @@
                 // `result` event is triggered when a user makes a selection
                 //  Add a marker at the result's coordinates
                 geocoder.on('result', function (e) {
-                    //map.getSource('single-point').setData(e.result.geometry);
                     console.log('A search: 0=>' + e.result.center[0] + '1=>' + e.result.center[1]);
+                    if(popup) popup.remove();
                     isInPolygon(e.result.center);
                 });
 
