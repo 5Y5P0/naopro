@@ -73,6 +73,11 @@
         min-width: 100%;
     }
 
+    .mapboxgl-popup-content {
+        padding-bottom: 5px;
+        padding-top: 15px;
+    }
+
     .popup-ko {
         color: red;
     }
@@ -80,6 +85,24 @@
     .popup-ok {
         color: forestgreen;
     }
+
+    .info {
+        /*position: absolute;
+        top: 40px;*/
+        position: absolute;
+        z-index: 1;
+        width: 50%;
+        left: 50%;
+        margin-left: -25%;
+        bottom: 35px;
+        visibility: hidden;
+    }
+
+        .info div {
+            background: #fff;
+            padding: 10px;
+            border-radius: 3px;
+        }
 </style>
 
 
@@ -190,6 +213,7 @@
 
                 <div id="map" class="w-100" style="padding:0px;margin:0px;border:2px solid transparent"></div>
                 <div id='geocoder' class='geocoder'></div>
+                <div id='info' class='info'><div style="text-align:center"></div></div>
 
             </div>
 
@@ -238,6 +262,9 @@
 
             initMap();
 
+            //var info = document.getElementById('info');
+            //info.innerHTML = '<strong>Click a marker ... .... .... .... .... .... ....</strong>';
+
         });
 
         function isInPolygon(point) {
@@ -250,46 +277,21 @@
 
                 var pt = turf.point(point);
                 var poly = turf.polygon([coords]);
+                var info = document.getElementById('info');
 
-                try {
+                if (turf.booleanPointInPolygon(pt, poly)) {
 
-                    var markerHeight = 50, markerRadius = 10, linearOffset = 25;
-                    var popupOffsets = {
-                        'top': [0, 0],
-                        'top-left': [0, 0],
-                        'top-right': [0, 0],
-                        'bottom': [0, -markerHeight],
-                        'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-                        'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-                        'left': [markerRadius, (markerHeight - markerRadius) * -1],
-                        'right': [-markerRadius, (markerHeight - markerRadius) * -1]
-                    };
+                    info.firstElementChild.innerHTML = 'Intervention disponible à cette adresse';
+                    info.firstElementChild.style.color = 'green';
 
-                    var messageHtml;
+                } else {
 
-                    if (turf.booleanPointInPolygon(pt, poly)) {
+                    info.firstElementChild.innerHTML = 'Intervention indisponible à cette adresse';
+                    info.firstElementChild.style.color = 'red';
 
-                        message = 'Nous pouvons nous déplacer à votre adresse.';
-                        popupClass = 'popup-ok';
-
-                    } else {
-
-                        console.error('KO');
-                        popupClass = 'popup-ko';
-
-                    }
-
-                    popup = new mapboxgl.Popup({ offset: popupOffsets, className: popupClass })
-                        .setLngLat(point)
-                        .setHTML(messageHtml)
-                        .setMaxWidth("300px")
-                        .addTo(map);
-
-                } catch (error) {
-                    console.error(error);
-                    // expected output: ReferenceError: nonExistentFunction is not defined
-                    // Note - error messages will vary depending on browser
                 }
+
+                info.firstElementChild.style.visibility = 'visible';
 
             });
 
@@ -376,10 +378,18 @@
                 // Add zoom and rotation controls to the map.
                 map.addControl(new mapboxgl.NavigationControl());
 
-                map.on('move', function (event) {
-                    //if (event.originalEvent) {
-                    console.log('A human moved the map');
-                    //}
+                $('.mapboxgl-ctrl-geocoder--input').on('input', function (e) {
+
+                    if (!e.value) {
+                        document.getElementById('info').firstElementChild.innerHTML = '';
+                        document.getElementById('info').firstElementChild.style.visibility = 'hidden';
+                    }
+
+                });
+
+                $('.mapboxgl-ctrl-geocoder--button').on('click', function () {
+                    document.getElementById('info').firstElementChild.innerHTML = '';
+                    document.getElementById('info').firstElementChild.style.visibility = 'hidden';
                 });
 
                 // Listen for the `result` event from the Geocoder
@@ -387,8 +397,11 @@
                 //  Add a marker at the result's coordinates
                 geocoder.on('result', function (e) {
                     console.log('A search: 0=>' + e.result.center[0] + '1=>' + e.result.center[1]);
-                    if(popup) popup.remove();
+
+                    //if (popup) popup.remove();
+                    map.flyTo({ center: e.result.center });
                     isInPolygon(e.result.center);
+
                 });
 
 
