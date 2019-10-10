@@ -251,23 +251,22 @@
 @section Scripts
 {
 
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoibmFvcHJvIiwiYSI6ImNrMTlyYmVzbjAxOGQzbnBpdmhrbnl2YmEifQ.qpxklqHmxVQEYXpGsrO09Q';
+        var map = new mapboxgl.Map({
+            container: 'map', // container id
+            style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+            center: [-74.50, 40], // starting position [lng, lat]
+            zoom: 9 // starting zoom
+        });
+    </script>
+
     <script type="text/javascript">
 
-        accessToken = 'pk.eyJ1IjoibmFvcHJvIiwiYSI6ImNrMTlyYmVzbjAxOGQzbnBpdmhrbnl2YmEifQ.qpxklqHmxVQEYXpGsrO09Q';
-        var map;
-        var popup;
-        var infoWindow;
-
-        $(document).ready(function () {
-
-            initMap();
-
-            //var info = document.getElementById('info');
-            //info.innerHTML = '<strong>Click a marker ... .... .... .... .... .... ....</strong>';
-
-        });
+        /*
 
         function isInPolygon(point) {
+            console.log("isInPolygon : debut");
 
             $.getJSON("/polygon-saint-gregoire.json", function (city) {
                 var coords = [];
@@ -295,129 +294,167 @@
 
             });
 
-
+            console.log("isInPolygon : fin");
 
         }
 
-        function initMap() {
+*/
 
-            $.getJSON("/polygon-saint-gregoire.json", function (city) {
+        $.getJSON("/polygon-saint-gregoire.json", function (city) {
 
-                var coords = [];
+            var coords = [];
 
-                $.each(city.coords, function (i, value) {
-                    coords[i] = [value.lng, value.lat];
-                });
+            //$.each(city.coords, function (i, value) {
+            //    coords[i] = [value.lng, value.lat];
+            //});
 
-                mapboxgl.accessToken = accessToken;
-                map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/mapbox/streets-v11',
-                    center: [city.center.lng, city.center.lat + 0.004],
-                    zoom: 11.7
-                });
+            /*
 
-                map.on('load', function () {
+            map.on('load', function () {
 
-                    map.addLayer({
-                        'id': 'saintGregoireSurface',
-                        'type': 'fill',
-                        'source': {
-                            'type': 'geojson',
-                            'data': {
-                                'type': 'Feature',
-                                'geometry': {
-                                    'type': 'Polygon',
-                                    'coordinates': [coords]
-                                }
+                map.addLayer({
+                    'id': 'saintGregoireSurface',
+                    'type': 'fill',
+                    'source': {
+                        'type': 'geojson',
+                        'data': {
+                            'type': 'Feature',
+                            'geometry': {
+                                'type': 'Polygon',
+                                'coordinates': [coords]
                             }
-                        },
-                        'layout': {},
-                        'paint': {
-                            'fill-outline-color': 'rgba(200, 200, 200, 1)',
-                            'fill-color': '#FF0000',
-                            'fill-opacity': 0.1
                         }
-                    });
-
-                    map.addLayer({
-                        "id": "saintGregoirePerimeter",
-                        "type": "line",
-                        "source": {
-                            "type": "geojson",
-                            "data": {
-                                "type": "Feature",
-                                "properties": {},
-                                "geometry": {
-                                    "type": "LineString",
-                                    "coordinates": coords
-                                }
-                            }
-                        },
-                        "layout": {
-                            "line-join": "round",
-                            "line-cap": "round"
-                        },
-                        "paint": {
-                            "line-color": "#FF0000",
-                            "line-width": 0.8
-                        }
-                    });
-
-                });
-
-                var geocoder = new MapboxGeocoder({
-                    accessToken: mapboxgl.accessToken,
-                    placeholder: 'Saisissez votre adresse ...',
-                    mapboxgl: mapboxgl,
-                    proximity: { longitude: city.center.lng, latitude: city.center.lat } // Coordinates of Saint-Grégoire (35760)
-                });
-
-                document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
-
-                // Add zoom and rotation controls to the map.
-                map.addControl(new mapboxgl.NavigationControl());
-
-                $('.mapboxgl-ctrl-geocoder--input').on('input', function (e) {
-
-                    if (!e.value) {
-                        document.getElementById('info').firstElementChild.innerHTML = '';
-                        document.getElementById('info').firstElementChild.style.visibility = 'hidden';
+                    },
+                    'layout': {},
+                    'paint': {
+                        'fill-outline-color': 'rgba(200, 200, 200, 1)',
+                        'fill-color': '#FF0000',
+                        'fill-opacity': 0.1
                     }
-
                 });
 
-                $('.mapboxgl-ctrl-geocoder--button').on('click', function () {
-                    document.getElementById('info').firstElementChild.innerHTML = '';
-                    document.getElementById('info').firstElementChild.style.visibility = 'hidden';
+                map.addLayer({
+                    "id": "saintGregoirePerimeter",
+                    "type": "line",
+                    "source": {
+                        "type": "geojson",
+                        "data": {
+                            "type": "Feature",
+                            "properties": {},
+                            "geometry": {
+                                "type": "LineString",
+                                "coordinates": coords
+                            }
+                        }
+                    },
+                    "layout": {
+                        "line-join": "round",
+                        "line-cap": "round"
+                    },
+                    "paint": {
+                        "line-color": "#FF0000",
+                        "line-width": 0.8
+                    }
                 });
-
-                // Listen for the `result` event from the Geocoder
-                // `result` event is triggered when a user makes a selection
-                //  Add a marker at the result's coordinates
-                geocoder.on('result', function (e) {
-                    console.log('A search: 0=>' + e.result.center[0] + '1=>' + e.result.center[1]);
-
-                    //if (popup) popup.remove();
-                    map.flyTo({ center: e.result.center });
-                    isInPolygon(e.result.center);
-
-                });
-
-
 
             });
 
-        }
+            var geocoder = new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                placeholder: 'Saisissez votre adresse ...',
+                mapboxgl: mapboxgl,
+                proximity: { longitude: city.center.lng, latitude: city.center.lat } // Coordinates of Saint-Grégoire (35760)
+            });
+
+            document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+
+            // Add zoom and rotation controls to the map.
+            map.addControl(new mapboxgl.NavigationControl());
+
+            const input = document.querySelector('.mapboxgl-ctrl-geocoder--input');
+
+            input.addEventListener('input', updateValue);
+
+            function updateValue(e) {
+
+                console.log("updateValue : debut");
+
+                if (!e.target.value) {
+                    document.getElementById('info').firstElementChild.innerHTML = '';
+                    document.getElementById('info').firstElementChild.style.visibility = 'hidden';
+                }
+
+                console.log("updateValue : fin");
+
+            }
+            $('.mapboxgl-ctrl-geocoder--button').on('click', function () {
+
+                Console.log("geocoder button click : debut");
+
+                document.getElementById('info').firstElementChild.innerHTML = '';
+                document.getElementById('info').firstElementChild.style.visibility = 'hidden';
+
+
+                console.log("geocoder button click : fin");
+
+            });
+
+            // Listen for the `result` event from the Geocoder
+            // `result` event is triggered when a user makes a selection
+            //  Add a marker at the result's coordinates
+            geocoder.on('result', function (e) {
+
+                console.log("result : debut");
+
+                map.flyTo({ center: e.result.center });
+                isInPolygon(e.result.center);
+
+                console.log("isInPolygon : fin");
+
+            });
+
+            */
+
+
+        });
+
+            //accessToken = 'pk.eyJ1IjoibmFvcHJvIiwiYSI6ImNrMTlyYmVzbjAxOGQzbnBpdmhrbnl2YmEifQ.qpxklqHmxVQEYXpGsrO09Q';
+            //var map;
+            //var popup;
+            //var infoWindow;
+
+            //mapboxgl.accessToken = accessToken;
+            //map = new mapboxgl.Map({
+            //    container: 'map',
+            //    style: 'mapbox://styles/mapbox/streets-v11'//,
+            //    //center: [city.center.lng, city.center.lat], //  + 0.004
+            //    //zoom: 11.7
+            //});
 
     </script>
 
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.js'></script>
-    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js'></script>
     <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.js'></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.min.js'></script>
     <script src='https://npmcdn.com/@@turf/turf/turf.min.js'></script>
 
+    @*<script type="text/javascript">
 
+            accessToken = 'pk.eyJ1IjoibmFvcHJvIiwiYSI6ImNrMTlyYmVzbjAxOGQzbnBpdmhrbnl2YmEifQ.qpxklqHmxVQEYXpGsrO09Q';
+            var map;
+            var popup;
+            var infoWindow;
+
+            mapboxgl.accessToken = accessToken;
+            map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v11'//,
+                //center: [city.center.lng, city.center.lat], //  + 0.004
+                //zoom: 11.7
+            });
+
+        </script>*@
 }
