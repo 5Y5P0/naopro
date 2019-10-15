@@ -13,51 +13,15 @@
          * element that contains the map. */
     #map {
         height: 450px;
-    }
-
-    #locationField, #controls {
-        position: relative;
-        width: 480px;
-    }
-
-    .label {
-        text-align: right;
-        font-weight: bold;
-        width: 100px;
-        color: #303030;
-        font-family: "Roboto";
-    }
-
-    #address {
-        border: 1px solid #000090;
-        background-color: #f0f9ff;
-        width: 480px;
-        padding-right: 2px;
-    }
-
-        #address td {
-            font-size: 10pt;
-        }
-
-    .field {
-        width: 99%;
-    }
-
-    .slimField {
-        width: 80px;
-    }
-
-    .wideField {
-        width: 200px;
-    }
-
-    #locationField {
-        height: 20px;
-        margin-bottom: 2px;
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        border: 2px solid transparent;
     }
 
     .parentMap {
         position: relative;
+        width: 100%;
     }
 
     .geocoder {
@@ -73,22 +37,7 @@
         min-width: 100%;
     }
 
-    .mapboxgl-popup-content {
-        padding-bottom: 5px;
-        padding-top: 15px;
-    }
-
-    .popup-ko {
-        color: red;
-    }
-
-    .popup-ok {
-        color: forestgreen;
-    }
-
     .info {
-        /*position: absolute;
-        top: 40px;*/
         position: absolute;
         z-index: 1;
         width: 50%;
@@ -199,9 +148,9 @@
 
     </div>
 
-    <div class="row" style="margin-top:2em">
+    <div class="row">
 
-        <div class="card w-100">
+        <div class="container" style="padding:0px">
 
             <div class="row">
 
@@ -209,10 +158,14 @@
 
             </div>
 
-            <div class="row parentMap" style="padding:0px;margin:0px">
-                    <div id="map" class="w-100" style="padding:0px;margin:0px;border:2px solid transparent"></div>
-                    <div id='geocoder' class='geocoder'></div>
-                    <div id='info' class='info'><div style="text-align:center"></div></div>
+            <div class="row">
+
+                    <div class="parentMap" style="padding:0px;margin:0px">
+                        <div id="map"></div>
+                        <div id="geocoder" class="geocoder"></div>
+                        <div id="info" class="info"><div style="text-align:center"></div></div>
+                    </div>
+
             </div>
 
         </div>
@@ -221,30 +174,7 @@
 
 </div>
 
-<!-- The Modal -->
-<div class="modal" id="addressesModal">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
 
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Choix possibles</h4>
-            </div>
-
-            <!-- Modal body -->
-            <div class="modal-body">
-                <ul id="addressesList">
-                </ul>
-            </div>
-
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-
-        </div>
-    </div>
-</div>
 
 @section Scripts
 {
