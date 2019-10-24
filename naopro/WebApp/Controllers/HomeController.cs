@@ -4,11 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using naopro.Models;
 using Microsoft.Extensions.Logging;
+using WebApp.Models;
 
-namespace naopro.Controllers
+namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
@@ -34,12 +33,6 @@ namespace naopro.Controllers
         {
             return View();
         }
-
-        public IActionResult Maps1()
-        {
-            return View();
-        }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
