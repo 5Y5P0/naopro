@@ -32,7 +32,7 @@ namespace WebApp.Controllers
             //return View(model);
             return View();
         }
-        public IActionResult<LegalNoticeView> LegalNotice()
+        public ActionResult<LegalNoticeView> LegalNotice()
         {
 
             LegalNoticeView result = new LegalNoticeView

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model LegalNoticeView
+@{
     ViewData["Title"] = "LegalNotice";
 }
 
@@ -53,7 +54,7 @@
         L’édition et la direction
         de la publication du site www.naopro.net est assurée par FOUCHER Sébastien,
         domiciliée 5 allée de la vigne, dont le numéro de
-        téléphone est 0671196962, et l'adresse e-mail sebastien@naopro.net.<o:p></o:p>
+        téléphone est @Model.EnterprisePhone, et l'adresse e-mail sebastien@naopro.net.<o:p></o:p>
     </span>
 </p>
 
