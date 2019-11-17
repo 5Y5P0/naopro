@@ -1,0 +1,183 @@
+﻿@model HomeViewModel
+@{
+    ViewData["Title"] = "Nous contacter";
+}
+
+<style>
+        /*
+    flip card
+    */
+        .card-flip > div {
+            backface-visibility: hidden;
+            transition: transform 0.6s;
+            transition-timing-function: linear;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            display: flex;
+        }
+
+        .card-front {
+            transform: rotateY(0deg);
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            position: absolute;
+            top: 0;
+        }
+
+        .card-flip:hover .card-front {
+            transform: rotateY(-180deg);
+        }
+
+        .card-flip:hover .card-back {
+            transform: rotateY(0deg);
+        }
+</style>
+
+<h1 style="text-align:center">
+    <span>@ViewData["Title"]</span>
+</h1>
+
+@* https://codepen.io/IamManchanda/pen/zoaWdW *@
+@*https://www.google.fr/search?sxsrf=ACYBGNR_TzLhe9-mMl_813MTFPZQtHyfYA%3A1573765119177&source=hp&ei=_7_NXeSWCIawUpu6kNAK&q=bootstrap+4+how+to+flip+card&oq=bootstrap+4+how+to+flip+card&gs_l=psy-ab.3..0i22i30l6.1455.1455..1747...0.0..0.101.101.0j1......0....2j1..gws-wiz.vO136Onf_2w&ved=0ahUKEwikkov3y-rlAhUGmBQKHRsdBKoQ4dUDCAY&uact=5*@
+
+@*<div class="container">
+        <div class="card-deck">
+            <div class="card">
+                <div class="card-body" style="background-image: url('/images/hands-typing-2654109_640x442.jpg');background-size: cover;padding:0px">
+                    <div class="h-100" style="background-color: black;background-size: cover;opacity: 0.62;margin:0px">
+                        <div style="background-color:black;opacity:1;width:20%;height:20%">
+                            <img src="https://media.licdn.com/dms/image/C4D03AQFvWfwopuNxfA/profile-displayphoto-shrink_200_200/0?e=1578528000&v=beta&t=a9qzjX8XEx6UJEtomBOK9lslklopjagniKCzPwWXWcQ" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                    <p class="card-text">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+@*https://www.codeply.com/go/roydoXgaLr/bootstrap-4-flip-cards*@
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card card-flip h-100">
+                <div class="card-front text-white bg-dark">
+                    <div class="card-body">
+                        <i class="fa fa-search fa-5x float-right"></i>
+                        <h3 class="card-title">Front</h3>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                </div>
+                <div class="card-back bg-white">
+                    <div class="card-body">
+                        <h3 class="card-title">Back</h3>
+                        <p class="card-text">Suprise this one has more more more more content on the back!</p>
+                        <a href="#" class="btn btn-outline-secondary">Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card card-flip h-100">
+                <div class="card-front text-white bg-warning">
+                    <div class="card-body">
+                        <i class="fa fa-search-plus fa-5x float-right"></i>
+                        <h3 class="card-title">Front</h3>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                </div>
+                <div class="card-back bg-dark text-white">
+                    <div class="card-body">
+                        <h3 class="card-title">Back #2</h3>
+                        <p class="card-text">Suprise this one has content on the back!</p>
+                        <a href="#" class="btn btn-outline-secondary">Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card card-flip h-100">
+                <div class="card-front text-white bg-primary">
+                    <div class="card-body">
+                        <i class="fa fa-arrow-circle-right fa-5x float-right"></i>
+                        <h3 class="card-title">Front</h3>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content. This one is a little because it has more text!</p>
+                    </div>
+                </div>
+                <div class="card-back bg-white">
+                    <div class="card-body text-primary">
+                        <h3 class="card-title">Wow! #3</h3>
+                        <p class="card-text">Suprise this one has content on the back!</p>
+                        <a href="#" class="btn btn-outline-primary">Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 my-3">
+            <div class="card card-flip h-100">
+                <div class="card-front text-white bg-dark">
+                    <div class="card-body">
+                        <i class="fa fa-search fa-5x float-right"></i>
+                        <h3 class="card-title">Front</h3>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                </div>
+                <div class="card-back bg-white">
+                    <div class="card-body">
+                        <h3 class="card-title">Back</h3>
+                        <p class="card-text">Suprise this one has more more more more content on the back!</p>
+                        <a href="#" class="btn btn-outline-secondary">Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 my-3">
+            <div class="card card-flip h-100">
+                <div class="card-front text-white bg-danger">
+                    <div class="card-body">
+                        <i class="fa fa-search fa-5x float-right"></i>
+                        <h3 class="card-title">Front</h3>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                </div>
+                <div class="card-back bg-white">
+                    <div class="card-body">
+                        <h3 class="card-title">Back</h3>
+                        <p class="card-text">Suprise this one has more more more more content on the back!</p>
+                        <a href="#" class="btn btn-outline-secondary">Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 my-3">
+            <div class="card card-flip h-100">
+                <div class="card-front text-white bg-success">
+                    <div class="card-body">
+                        <i class="fa fa-search fa-5x float-right"></i>
+                        <h3 class="card-title">Front</h3>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                </div>
+                <div class="card-back bg-white">
+                    <div class="card-body">
+                        <h3 class="card-title">Back</h3>
+                        <p class="card-text">Suprise this one has more more more more content on the back!</p>
+                        <a href="#" class="btn btn-outline-secondary">Action</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -28,9 +28,13 @@ namespace WebApp.Controllers
 
         public IActionResult Contact()
         {
-            //HomeViewModel model = new HomeViewModel() { GooleApi = _iconfiguration.GetSection("GoogleApi").Value };
-            //return View(model);
-            return View();
+            ContactView result = new ContactView
+            {
+                EnterpriseName = _about.Value.Name,
+                EnterprisePhone = _about.Value.Phone
+            };
+
+            return View(result);
         }
         public ActionResult<LegalNoticeView> LegalNotice()
         {
