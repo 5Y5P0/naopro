@@ -4,182 +4,400 @@
     string fraisInclus = "Coût de la prestation inclu dans le prix négocié";
 }
 
-<h1 style="text-align:center">
-    <span>@ViewData["Title"]</span>
-</h1>
-
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.css' rel='stylesheet' />
 <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.2/mapbox-gl-geocoder.css' type='text/css' />
+
 <style>
+    /* stylelint-disable selector-list-comma-newline-after */
 
-    /* Always set the map height explicitly to define the size of the div
-         * element that contains the map. */
-    #map {
-        height: 450px;
-        width: 100%;
-        padding: 0px;
-        margin: 0px;
-        border: 2px solid transparent;
+    .blog-header {
+        line-height: 1;
+        border-bottom: 1px solid #e5e5e5;
     }
 
-    .parentMap {
-        position: relative;
-        width: 100%;
+    .blog-header-logo {
+        font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+        font-size: 2.25rem;
     }
 
-    .geocoder {
-        position: absolute;
-        z-index: 1;
-        width: 50%;
-        left: 50%;
-        margin-left: -25%;
-        top: 20px;
-    }
-
-    .mapboxgl-ctrl-geocoder {
-        min-width: 100%;
-    }
-
-    .info {
-        position: absolute;
-        z-index: 1;
-        width: 50%;
-        left: 50%;
-        margin-left: -25%;
-        bottom: 35px;
-        visibility: hidden;
-    }
-
-        .info div {
-            background: #fff;
-            padding: 10px;
-            border-radius: 3px;
+        .blog-header-logo:hover {
+            text-decoration: none;
         }
 
-    .card {
-        margin-bottom: 15px !important
+    h1, h2, h3, h4, h5, h6 {
+        font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+    }
+
+    .display-4 {
+        font-size: 2.5rem;
+    }
+
+    @@media (min-width: 768px) {
+        .display-4 {
+            font-size: 3rem;
+        }
+    }
+
+    .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+    }
+
+        .nav-scroller .nav {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-scroller .nav-link {
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            font-size: .875rem;
+        }
+
+    .card-img-right {
+        height: 100%;
+        border-radius: 0 3px 3px 0;
+    }
+
+    .flex-auto {
+        -ms-flex: 0 0 auto;
+        flex: 0 0 auto;
+    }
+
+    .h-250 {
+        height: 250px;
+    }
+
+    @@media (min-width: 768px) {
+        .h-md-250 {
+            height: 250px;
+        }
+    }
+
+    /*
+    * Blog name and description
+    */
+    .blog-title {
+        margin-bottom: 0;
+        font-size: 2rem;
+        font-weight: 400;
+    }
+
+    .blog-description {
+        font-size: 1.1rem;
+        color: #999;
+    }
+
+    @@media (min-width: 40em) {
+        .blog-title {
+            font-size: 3.5rem;
+        }
+    }
+
+    /* Pagination */
+    .blog-pagination {
+        margin-bottom: 4rem;
+    }
+
+        .blog-pagination > .btn {
+            border-radius: 2rem;
+        }
+
+    /*
+    * Blog posts
+    */
+    .blog-post {
+        margin-bottom: 4rem;
+    }
+
+    .blog-post-title {
+        margin-bottom: .25rem;
+        font-size: 2.5rem;
+    }
+
+    .blog-post-meta {
+        margin-bottom: 1.25rem;
+        color: #999;
+    }
+
+    /*
+    * Footer
+    */
+    .blog-footer {
+        padding: 2.5rem 0;
+        color: #999;
+        text-align: center;
+        background-color: #f9f9f9;
+        border-top: .05rem solid #e5e5e5;
+    }
+
+        .blog-footer p:last-child {
+            margin-bottom: 0;
+        }
+
+    .bg-cover {
+        background-image: url('/Images/laptop-3174729_1280x800.jpg');
+        background-size: cover;
     }
 </style>
+@*<style>
 
+        /* Always set the map height explicitly to define the size of the div
+             * element that contains the map. */
+        #map {
+            height: 450px;
+            width: 100%;
+            padding: 0px;
+            margin: 0px;
+            border: 2px solid transparent;
+        }
+
+        .parentMap {
+            position: relative;
+            width: 100%;
+        }
+
+        .geocoder {
+            position: absolute;
+            z-index: 1;
+            width: 50%;
+            left: 50%;
+            margin-left: -25%;
+            top: 20px;
+        }
+
+        .mapboxgl-ctrl-geocoder {
+            min-width: 100%;
+        }
+
+        .info {
+            position: absolute;
+            z-index: 1;
+            width: 50%;
+            left: 50%;
+            margin-left: -25%;
+            bottom: 35px;
+            visibility: hidden;
+        }
+
+            .info div {
+                background: #fff;
+                padding: 10px;
+                border-radius: 3px;
+            }
+
+        .card {
+            margin-bottom: 15px !important
+        }
+    </style>*@
 
 <div class="container">
 
-    <div class="row" style="margin-bottom:1rem">
-
-        <div class="card-deck">
-
-            <div class="row">
-
-                <div class="card">
-                    <img class="card-img-top" src="~/Images/accounting-3190208_640.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Achat</h5>
-                        <div class="card-text">
-                            <p>Nous vous accompagnons dans l'acquisition de vos équipements et logiciels informatiques.</p>
-                            <p>A partir de votre besoin, nous sélectionnons ensemble les propositions. Puis, nous négocions pour vous les conditions tarifaires.</p>
-                        </div>
-                    </div>
-                    <div class="card-footer text-right">
-                        <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">Sur devis<sup><abbr title="@fraisInclus"> (1)</abbr></sup></label></small>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="~/Images/web-design-2038872_640x423.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title" style="">Développement</h5>
-                        <div class="card-text">
-                            <p>Nous réalisons des sites internet sur-mesure.</p>
-                            <p>Après une étude de vos souhaits, nous concevons un site WEB dédié pour répondre au mieux à vos attentes.</p>
-                        </div>
-                    </div>
-                    <div class="card-footer text-right">
-                        <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">400 euros<sup><abbr title="@tvaNonApplicable"> (2)</abbr></sup> / jour</label></small>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="~/Images/software-development-4165307_640.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Formation</h5>
-                        <div class="card-text">
-                            <p>Nous vous enseignons à devenir autonome sur vos outils informatiques.</p>
-                            <p>Selon vos cas d'utilisation, nous créons un programme adéquate qui vous permettra d'utiliser vos équipements sans aide.</p>
-                        </div>
-                    </div>
-                    <div class="card-footer text-right">
-                        <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">50 euros<sup><abbr title="@tvaNonApplicable"> (2)</abbr></sup> / heure</label></small>
-                    </div>
-                </div>
-
-            </div>
-            <div class="row">
-
-                <div class="card">
-                    <img class="card-img-top" src="~/Images/computer-3343887_640x423.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Assistance</h5>
-                        <div class="card-text">
-                            <p>Nous vous aidons à résoudre vos problèmes informatiques.</p>
-                            <p>Après analyse des difficultés que vous rencontrez, nous déterminons ensemble la meilleure solution.</p>
-                        </div>
-                    </div>
-                    <div class="card-footer text-right">
-                        <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">50 euros<sup><abbr title="@tvaNonApplicable"> (2)</abbr></sup> / heure</label></small>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="~/Images/application-3399516_640x423.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Conseil</h5>
-                        <div class="card-text">
-                            <p>Nous proposons également des services personnalisés.</p>
-                            <p>Vous avez un autre besoin, nous pouvons vous guider dans la réalisation de votre projet.</p>
-                        </div>
-                    </div>
-                    <div class="card-footer text-right">
-                        <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">Sur devis<sup><abbr title="@fraisInclus"> (1)</abbr></sup></label></small>
-                    </div>
-                </div>
-                <div class="card border-0">
-                    <div class="card-body">
-                        <div class="card-text">
-                            <ul style="list-style:none;padding-left:0;">
-                                <li style="font-style: italic"><small class="text-muted">(1) @fraisInclus</small></li>
-                                <li style="font-style: italic"><small class="text-muted">(2) @tvaNonApplicable</small></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+    <div class="jumbotron p-4 p-md-5 text-white rounded bg-cover">
+        <div class="offset-md-6 col-md-6 px-0 text-sm-right">
+            <h1 class="display-4 font-italic">Conseil et expertise technologiques</h1>
+            <p class="lead my-3">Créé par un développeur expérimenté et passionné, notre entreprise propose d'accompagner tous vos projets informatiques.</p>
+            <p class="lead mb-0"><a href="/home/contact" class="text-white font-weight-bold">Nous contacter ...</a></p>
         </div>
-
-    </div>
-
-    <div class="row">
-
-        <div class="container" style="padding:0px">
-
-            <div class="row">
-
-                <h5>Zone de déplacement à domicile : Saint-grégoire (35760)</h5>
-
-            </div>
-
-            <div class="row">
-
-                <div class="parentMap" style="padding:0px;margin:0px">
-                    <div id="map"></div>
-                    <div id="geocoder" class="geocoder"></div>
-                    <div id="info" class="info"><div style="text-align:center"></div></div>
-                </div>
-
-            </div>
-
-        </div>
-
     </div>
 
 </div>
+
+<div class="container">
+
+    <h1 style="text-align:center">
+        <span>@ViewData["Title"]</span>
+    </h1>
+
+    <div class="card-deck">
+
+        <div class="row" style="margin:0px">
+            <div class="card col-md-4" style="margin-bottom: 10px">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+            <div class="card col-md-4" style="margin-bottom: 10px">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+            <div class="card col-md-4" style="margin-bottom: 10px">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin:0px">
+            <div class="card col-md-4" style="margin-bottom: 10px">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+            <div class="card col-md-4" style="margin-bottom: 10px">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+            <div class="card col-md-4" style="margin-bottom: 10px">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@*
+    <div class="container">
+
+        <div class="row">
+
+            <div class="card-deck">
+
+                <div class="row">
+
+                    <div class="card col-4">
+                        <img class="card-img-top" src="~/Images/accounting-3190208_640.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Achat</h5>
+                            <div class="card-text">
+                                <p>Nous vous accompagnons dans l'acquisition de vos équipements et logiciels informatiques.</p>
+                                <p>A partir de votre besoin, nous sélectionnons ensemble les propositions. Puis, nous négocions pour vous les conditions tarifaires.</p>
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">Sur devis<sup><abbr title="@fraisInclus"> (1)</abbr></sup></label></small>
+                        </div>
+                    </div>
+                    <div class="card col-4">
+                        <img class="card-img-top" src="~/Images/web-design-2038872_640x423.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title" style="">Développement</h5>
+                            <div class="card-text">
+                                <p>Nous réalisons des sites internet sur-mesure.</p>
+                                <p>Après une étude de vos souhaits, nous concevons un site WEB dédié pour répondre au mieux à vos attentes.</p>
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">400 euros<sup><abbr title="@tvaNonApplicable"> (2)</abbr></sup> / jour</label></small>
+                        </div>
+                    </div>
+                    <div class="card col-4">
+                        <img class="card-img-top" src="~/Images/software-development-4165307_640.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Formation</h5>
+                            <div class="card-text">
+                                <p>Nous vous enseignons à devenir autonome sur vos outils informatiques.</p>
+                                <p>Selon vos cas d'utilisation, nous créons un programme adéquate qui vous permettra d'utiliser vos équipements sans aide.</p>
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">50 euros<sup><abbr title="@tvaNonApplicable"> (2)</abbr></sup> / heure</label></small>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="card col-4">
+                        <img class="card-img-top" src="~/Images/computer-3343887_640x423.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Assistance</h5>
+                            <div class="card-text">
+                                <p>Nous vous aidons à résoudre vos problèmes informatiques.</p>
+                                <p>Après analyse des difficultés que vous rencontrez, nous déterminons ensemble la meilleure solution.</p>
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">50 euros<sup><abbr title="@tvaNonApplicable"> (2)</abbr></sup> / heure</label></small>
+                        </div>
+                    </div>
+                    <div class="card col-4">
+                        <img class="card-img-top" src="~/Images/application-3399516_640x423.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Conseil</h5>
+                            <div class="card-text">
+                                <p>Nous proposons également des services personnalisés.</p>
+                                <p>Vous avez un autre besoin, nous pouvons vous guider dans la réalisation de votre projet.</p>
+                            </div>
+                        </div>
+                        <div class="card-footer text-right">
+                            <small class="text-muted"><label style="font-weight:bold;font-style: italic;font-size-adjust:1.1">Sur devis<sup><abbr title="@fraisInclus"> (1)</abbr></sup></label></small>
+                        </div>
+                    </div>
+                    <div class="card col-4 border-0">
+                        <div class="card-body">
+                            <div class="card-text">
+                                <ul style="list-style:none;padding-left:0;">
+                                    <li style="font-style: italic"><small class="text-muted">(1) @fraisInclus</small></li>
+                                    <li style="font-style: italic"><small class="text-muted">(2) @tvaNonApplicable</small></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    <div class="row">
+
+            <div class="container" style="padding:0px">
+
+                <div class="row">
+
+                    <h5>Zone de déplacement à domicile : Saint-grégoire (35760)</h5>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="parentMap" style="padding:0px;margin:0px">
+                        <div id="map"></div>
+                        <div id="geocoder" class="geocoder"></div>
+                        <div id="info" class="info"><div style="text-align:center"></div></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+*@
 
 
 
