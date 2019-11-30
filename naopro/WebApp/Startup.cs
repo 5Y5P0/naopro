@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebApp.Models;
+using Microsoft.Extensions.Options;
 
 namespace WebApp
 {
@@ -52,6 +53,8 @@ namespace WebApp
 
             // Add our Config object so it can be injected
             services.Configure<About>(Configuration.GetSection(nameof(About)));
+
+            services.AddTransient<AppInfoViewModel>();
 
         }
 
