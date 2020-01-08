@@ -52,9 +52,9 @@ namespace WebApp
             services.AddOptions();
 
             // Add our Config object so it can be injected
-            services.Configure<About>(Configuration.GetSection(nameof(About)));
+            services.Configure<Contact>(Configuration.GetSection(nameof(Contact)));
 
-            services.AddTransient<AppInfoViewModel>();
+            services.AddTransient<SharedViewModel>();
 
         }
 

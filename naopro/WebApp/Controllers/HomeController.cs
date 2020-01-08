@@ -14,9 +14,9 @@ namespace WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IOptions<About> _about;
+        private readonly IOptions<Contact> _about;
         private readonly SmtpClient _smtpClient;
-        public HomeController(ILogger<HomeController> logger, IOptions<About> about, SmtpClient smtpClient)
+        public HomeController(ILogger<HomeController> logger, IOptions<Contact> about, SmtpClient smtpClient)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _about = about ?? throw new ArgumentNullException(nameof(about));
@@ -38,6 +38,12 @@ namespace WebApp.Controllers
 
             return View(result);
         }
+
+        public ActionResult CookiesNotice()
+        {
+            return View();
+        }
+
         public ActionResult<LegalNoticeView> LegalNotice()
         {
 
