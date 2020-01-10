@@ -1,0 +1,9 @@
+﻿@inherits PagerComponent
+<ul class="pagination">
+    @for (var i = 1; i <= TotalPages; i++)
+    {
+        <li class="page-item @(i == PageNumber ? "active" : "")">
+            <a href="@LinkUrl/@i" class="page-link">@i</a>
+        </li>
+    }
+</ul>
