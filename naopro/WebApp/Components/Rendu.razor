@@ -1,0 +1,5 @@
+﻿<input @bind-value="Texte" @bind-value:event="oninput" />
+
+@code {
+    [Parameter] public string Texte { get; set; } = "defaut";
+}
