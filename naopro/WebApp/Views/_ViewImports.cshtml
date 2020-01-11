@@ -1,5 +1,7 @@
 ﻿@using WebApp
 @using WebApp.Models
-@using WebApp.Components
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 @inject SharedViewModel SharedInfo
+@using WebApp.Components
+@inject IAppVersionService AppVersionService

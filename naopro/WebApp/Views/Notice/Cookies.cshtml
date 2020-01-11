@@ -1,5 +1,10 @@
-﻿@{
+﻿@model Rgpd
+@{
     ViewData["Title"] = "Gestion des cookies";
+}
+
+@section Style {
+    <link rel="stylesheet" href="~/css/noticePages.css" />
 }
 
 <h1 style="text-align:center">
@@ -8,7 +13,7 @@
 
 @*https://www.creditmutuel.com/fr/donnees-personnelles-et-gestion-des-cookies*@
 
-<h6>Qu'est-ce qu'un cookie ?</h6>
+<h5>Qu'est-ce qu'un cookie ?</h5>
 <p>
     Un cookie est un fichier envoyé par un site à votre navigateur internet et stocké sur
     l'appareil qui vous a permis d'accéder à internet (votre ordinateur, tablette ou smartphone
@@ -19,7 +24,7 @@
     (navigation, espace personnel).
 </p>
 
-<h6>Pourquoi utiliser des cookies ?</h6>
+<h5>Pourquoi utiliser des cookies ?</h5>
 <p>
     Les cookies utilisés sur ce site servent à sécuriser et faciliter votre navigation.
     <br />
@@ -30,7 +35,7 @@
     l'accès à certaines parties du site.
 </p>
 
-<h6>Paramétrer soi-même son navigateur pour accepter ou rejeter les cookies.</h6>
+<h5>Paramétrer soi-même son navigateur pour accepter ou rejeter les cookies.</h5>
 <p>
     Vous pouvez paramétrer votre navigateur pour accepter ou refuser au cas par cas
     les cookies préalablement à leur installation.
@@ -76,7 +81,7 @@
     </ul>
 </p>
 
-<h6>Donner ou refuser son consentement.</h6>
+<h5>Donner ou refuser son consentement.</h5>
 <p>
     Lorsque vous visitez notre site, un message vous informe de l'utilisation de cookies.
     Il vous indique également qu'en poursuivant votre navigation sur notre site, vous acceptez ces cookies
@@ -86,7 +91,7 @@
     Certains sont nécessaires à votre utilisation de notre site.
 </p>
 
-<h6>Les cookies strictement nécessaires.</h6>
+<h5>Les cookies strictement nécessaires.</h5>
 <p>
     Il s'agit des cookies nécessaires au fonctionnement de notre site.
     <br />
@@ -119,14 +124,14 @@
     </table>
 </p>
 
-<h6>Les cookies d'analyse de performances.</h6>
+<h5>Les cookies d'analyse de performances.</h5>
 <p>
     Il s'agit des cookies qui nous permettent de connaître l'utilisation et les performances de notre site et d'en améliorer le fonctionnement.
     <br />
     Ces cookies ne sont pas encore utilisés sur notre site, ils seront prochainement mis en service.
 </p>
 
-<h6>Les cookies de réseaux sociaux.</h6>
+<h5>Les cookies de réseaux sociaux.</h5>
 <p>
     Notre site internet contiendra prochainement des boutons de partage vers Facebook, LinkedIn et Tweeter qui vous permettront de partager
     nos contenus sur ces réseaux sociaux.
@@ -139,7 +144,7 @@
     des finalités d’utilisation des informations qu’ils peuvent recueillir grâce à ces boutons de partage.
 </p>
 
-<h6>Durée de vie des cookies.</h6>
+<h5>Durée de vie des cookies.</h5>
 <p>
-    L'ensemble de ces cookies, hors cookies essentiels, a une durée de validité inférieure à 13 mois.
+    L'ensemble de ces cookies, hors cookies essentiels, a une durée de validité inférieure à @Model.TimeLife mois.
 </p>

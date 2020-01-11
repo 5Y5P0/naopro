@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/myCookieConsent.css" />
-    @RenderSection("HeadAdd", required: false)
+    @RenderSection("Style", required: false)
 </head>
 <body>
     <header>
@@ -63,6 +63,8 @@
             &copy; 2019 - @SharedInfo.Name
             <a asp-area="" asp-controller="Home" asp-action="LegalNotice"> | Mentions légales</a>
             <a asp-area="" asp-controller="Notice" asp-action="Cookies"> | Cookies</a>
+            <a asp-area="" asp-controller="Notice" asp-action="Rgpd"> | Protection des données</a>
+             | @AppVersionService.Version
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

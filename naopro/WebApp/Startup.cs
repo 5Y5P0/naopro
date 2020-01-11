@@ -17,16 +17,41 @@ namespace WebApp
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            Env = env;
         }
+
+        public IWebHostEnvironment Env { get; set; }
 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            #region L'application est recompilée automatiquement quand une vue est modifiée
+
+            /*
+             * ! Cliquer sur actualiser (F5) dans le navigateur pour charge la vue avec les modifications.
+             */
+
+            /* ref : 
+             * https://docs.microsoft.com/en-us/aspnet/core/mvc/views/view-compilation?view=aspnetcore-3.0#runtime-compilation
+             * https://github.com/dotnet/aspnetcore/issues/14194
+             */
+
+            IMvcBuilder builder = services.AddRazorPages();
+#if DEBUG
+            if (Env.IsDevelopment())
+            {
+                builder.AddRazorRuntimeCompilation();
+            }
+#endif
+
+            #endregion
+
             services.AddServerSideBlazor();
 
             services.AddControllersWithViews();
@@ -45,11 +70,20 @@ namespace WebApp
                 };
             });
 
+            services.AddScoped<Rgpd>((serviceProvider) =>
+            {
+                var config = serviceProvider.GetRequiredService<IConfiguration>();
+                return new Rgpd()
+                {
+                    TimeLife = config.GetValue<int>("Rgpd:TimeLife")
+                };
+            });
+
             services.Configure<IISServerOptions>(options =>
             {
                 options.AutomaticAuthentication = false;
             });
-            
+
             // Add functionality to inject IOptions<T>
             services.AddOptions();
 
@@ -58,13 +92,26 @@ namespace WebApp
 
             services.AddTransient<SharedViewModel>();
 
-            
+            #region Le numéro de version récupérer
+
+            /*
+             * ! Fenêtre propriété du projet / onglet package / Version de package
+             */
+
+            /* ref : 
+             * https://dotnetthoughts.net/how-to-display-app-version-in-aspnet-core/
+             */
+
+            services.AddTransient<IAppVersionService, AppVersionService>();
+
+            #endregion
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

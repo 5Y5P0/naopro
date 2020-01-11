@@ -15,17 +15,25 @@ namespace WebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IOptions<Contact> _about;
+        private readonly SmtpClient _smtp;
+        private readonly Rgpd _rgpd;
 
-        public NoticeController(ILogger<HomeController> logger, IOptions<Contact> about)
+        public NoticeController(ILogger<HomeController> logger, IOptions<Contact> about, SmtpClient smtpClient, Rgpd rgpd)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _about = about ?? throw new ArgumentNullException(nameof(about));
-
+            _smtp = smtpClient ?? throw new ArgumentNullException(nameof(smtpClient));
+            _rgpd = rgpd ?? throw new ArgumentNullException(nameof(rgpd));
         }
 
         public ActionResult Cookies()
         {
-            return View();
+            return View(_rgpd);
+        }
+
+        public ActionResult Rgpd()
+        {
+            return View(_rgpd);
         }
 
     }
