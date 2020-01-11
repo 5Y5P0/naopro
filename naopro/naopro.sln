@@ -12,8 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csproj", "{F55CF3F6-6C6C-4F69-91F0-9DC62B66A26F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorApp1", "BlazorApp1\BlazorApp1.csproj", "{CD43ED29-C6B1-44AC-988C-4605AEB53339}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,10 +26,6 @@ Global
 		{F55CF3F6-6C6C-4F69-91F0-9DC62B66A26F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F55CF3F6-6C6C-4F69-91F0-9DC62B66A26F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F55CF3F6-6C6C-4F69-91F0-9DC62B66A26F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CD43ED29-C6B1-44AC-988C-4605AEB53339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD43ED29-C6B1-44AC-988C-4605AEB53339}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD43ED29-C6B1-44AC-988C-4605AEB53339}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD43ED29-C6B1-44AC-988C-4605AEB53339}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
