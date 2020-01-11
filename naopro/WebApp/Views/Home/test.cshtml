@@ -1,0 +1,30 @@
+﻿@page
+@{
+    Layout = "";
+}
+@using Microsoft.AspNetCore.Components
+@using WebApp.Components
+
+<html>
+
+<body>
+    <h1>test</h1>
+
+    <div>
+        <component type="typeof(Rendu)" render-mode="ServerPrerendered"
+                   param-Texte1="@("test1")" param-Texte2="@("test2")" param-IncrementValue="10" />
+    </div>
+    <div>
+        @(await Html.RenderComponentAsync<Rendu>(RenderMode.ServerPrerendered, new { Texte1 = "test1", Texte2 = "test2", IncrementValue = -10 }))
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    </environment>
+</body>
+
+</html>
+

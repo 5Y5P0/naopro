@@ -4,4 +4,4 @@ Lorsque le site contiendra des données personnelles, il faut également changer l
 https://www.legalplace.fr/contrats/conditions-generales-d-utilisation/creer/3
 https://www.legalplace.fr/contrats/mentions-legales/creer
 
-
+https://docs.microsoft.com/fr-fr/aspnet/core/blazor/components?view=aspnetcore-3.1

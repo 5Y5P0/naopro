@@ -16,6 +16,12 @@ namespace WebApp.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IOptions<Contact> _about;
         private readonly SmtpClient _smtpClient;
+
+        public IActionResult Test()
+        {
+            return View();
+        }
+
         public HomeController(ILogger<HomeController> logger, IOptions<Contact> about, SmtpClient smtpClient)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));

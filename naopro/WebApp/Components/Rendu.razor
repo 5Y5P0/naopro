@@ -1,5 +1,18 @@
-﻿<input @bind-value="Texte" @bind-value:event="oninput" />
+﻿<input @bind-value="Texte1" @bind-value:event="oninput" />
+<input @bind-value="Texte2" @bind-value:event="oninput" />
+<label>@IncrementValue</label>
+<label>@i</label>
+<button type="button" class="btn btn-primary" @onclick="Increment">
+    Update heading
+</button>
 
 @code {
-    [Parameter] public string Texte { get; set; } = "defaut";
+    [Parameter] public string Texte1 { get; set; } = "defaut1";
+    [Parameter] public string Texte2 { get; set; } = "defaut2";
+    [Parameter] public int IncrementValue { get; set; } = 1;
+    private int i = 0;
+    void Increment()
+    {
+        i = i + IncrementValue;
+    }
 }

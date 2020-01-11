@@ -6,14 +6,6 @@
     <span>@ViewData["Title"]</span>
 </h1>
 
-@*<Rendu>
-    @(await Html.RenderComponentAsync<Rendu>( "test"))
-</Rendu>*@
-
-<component type="typeof(Rendu)" render-mode="ServerPrerendered" param-Texte="@("test")" />
-
-@*<Counter pas=10 />*@
-
 @*https://www.creditmutuel.com/fr/donnees-personnelles-et-gestion-des-cookies*@
 
 <h6>Qu'est-ce qu'un cookie ?</h6>
@@ -150,6 +142,6 @@
     L'ensemble de ces cookies, hors cookies essentiels, a une durée de validité inférieure à 13 mois.
 </p>
 
-@section Scripts {
-<script src="~/_framework/blazor.server.js"></script>
-}
+@*@section Scripts {
+        <script src="~/_framework/blazor.server.js"></script>
+    }*@
