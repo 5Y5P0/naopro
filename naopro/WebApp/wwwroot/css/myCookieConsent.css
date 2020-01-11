@@ -3,7 +3,7 @@
     min-height: 20px;
     font-family: OpenSans, arial, "sans-serif";
     padding: 10px 20px;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.8);
     overflow: hidden;
     position: fixed;
     color: #FFF;
@@ -30,7 +30,7 @@
     color: #fda016;
 }
 
-#myCookieConsent a#cookieButton {
+#myCookieConsent a.cookieLink {
     display: inline-block;
     color: #000000;
     font-size: 1.1em;
@@ -38,11 +38,12 @@
     text-decoration: none;
     cursor: pointer;
     padding: 2px 20px;
-    float: right;
+    margin: 0.5em;
+    /*float: right;*/
     border-radius: 20px;
 }
 
-#myCookieConsent a#cookieButton:hover {
+#myCookieConsent a.cookieLink:hover {
     background: #fda016;
     color: #000;
 }

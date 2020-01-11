@@ -50,8 +50,13 @@
         </main>
     </div>
     <div id="myCookieConsent">
-        <a id="cookieButton">Understood</a>
-        <div>This&nbsp;website is&nbsp;using&nbsp;cookies. <a href="https://html-online.com/privacy-terms-and-conditions/">More&nbsp;details</a></div>
+        <p>
+            En poursuivant votre navigation sur notre site internet, vous acceptez l’utilisation de cookies ou technologies
+            similaires pour sécuriser votre connexion et faciliter votre navigation, vous proposer des offres adaptées et
+            permettre l’élaboration de statistiques. Pour en savoir plus ou désactiver les cookies, consultez notre page dédiée.
+        </p>
+        <a class="cookieLink" asp-controller="Notice" asp-action="Cookies">Cookies</a>
+        <a class="cookieLink" id="cookieButton">J'accepte</a>
     </div>
     <footer class="border-top footer text-muted">
         <div class="container">

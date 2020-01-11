@@ -26,7 +26,7 @@ function testFirstCookie() {
 }
 $(document).ready(function () {
 	$("#cookieButton").click(function () {
-		console.log('Understood');
+		console.log($("#cookieButton").text);
 		var expire = new Date();
 		expire = new Date(expire.getTime() + 7776000000);
 		document.cookie = "cookieCompliancyAccepted=here; expires=" + expire + ";path=/";
