@@ -8,7 +8,8 @@ namespace WebApp.Models
 {
     public class AppVersionService : IAppVersionService
     {
-        public string Version =>
-            Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
+        public string Version => Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
+
+        public string FullVersion => typeof(Startup).Assembly.GetName().Version.ToString();
     }
 }

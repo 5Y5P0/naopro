@@ -100,6 +100,8 @@ namespace WebApp
 
             /* ref : 
              * https://dotnetthoughts.net/how-to-display-app-version-in-aspnet-core/
+             * https://github.com/aspnet/Announcements/issues/237
+             * https://stackoverflow.com/questions/39650150/display-project-version-in-asp-net-core-1-0-0-web-application/49287107
              */
 
             services.AddTransient<IAppVersionService, AppVersionService>();
