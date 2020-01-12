@@ -9,6 +9,8 @@ namespace WebApp.Models
     {
         string FullVersion { get; }
         string Version { get; }
+
+        string PublicVersion { get; }
     }
 
 }
