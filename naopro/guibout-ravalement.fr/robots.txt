@@ -1,0 +1,5 @@
+Sitemap: http://www.guibout-ravalement.fr/sitemap.xml
+
+# Autorise l'indexation de tout le site web
+User-agent: *
+Allow: /

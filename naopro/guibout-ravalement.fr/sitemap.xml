@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+   <url>
+
+      <loc>http://www.guibout-ravalement.fr/</loc>
+
+      <priority>1.0</priority>
+
+   </url>
+
+   <url>
+
+      <loc>http://www.guibout-ravalement.fr/contact.html</loc>
+
+      <priority>0.7</priority>
+
+   </url>   
+
+   <url>
+
+      <loc>http://www.guibout-ravalement.fr/enduit.html</loc>
+
+      <priority>0.6</priority>
+
+   </url>   
+
+   <url>
+
+      <loc>http://www.guibout-ravalement.fr/isolation.html</loc>
+
+      <priority>0.5</priority>
+
+   </url>
+
+   <url>
+
+      <loc>http://www.guibout-ravalement.fr/jointpierre.html</loc>
+
+      <priority>0.3</priority>
+
+   </url>
+
+   <url>
+
+      <loc>http://www.guibout-ravalement.fr/peinture.html</loc>
+
+      <priority>0.3</priority>
+
+   </url>
+   
+</urlset>
