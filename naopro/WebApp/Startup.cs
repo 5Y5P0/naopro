@@ -70,10 +70,10 @@ namespace WebApp
                 };
             });
 
-            services.AddScoped<Rgpd>((serviceProvider) =>
+            services.AddScoped<CookiesView>((serviceProvider) =>
             {
                 var config = serviceProvider.GetRequiredService<IConfiguration>();
-                return new Rgpd()
+                return new CookiesView()
                 {
                     TimeLife = config.GetValue<int>("Rgpd:TimeLife")
                 };

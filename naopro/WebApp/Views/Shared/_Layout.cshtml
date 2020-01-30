@@ -60,13 +60,16 @@
     </div>
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2019 - @SharedInfo.Name
+            &copy; @DateTime.Today.Year - @SharedInfo.Contact.Name - <abbr title="@AppVersionService.Version">@AppVersionService.PublicVersion</abbr>
             <a asp-area="" asp-controller="Home" asp-action="LegalNotice"> | Mentions légales</a>
             <a asp-area="" asp-controller="Notice" asp-action="Cookies"> | Cookies</a>
-            <a asp-area="" asp-controller="Notice" asp-action="Rgpd"> | Protection des données</a>
-             | <abbr title="@AppVersionService.Version">@AppVersionService.PublicVersion</abbr>
+            <a asp-area="" asp-controller="Notice" asp-action="Rgpd"> | Vie privée</a>
         </div>
     </footer>
+    <script type="text/javascript">
+        const cookieAcceptedName = "cookieCompliancyAccepted";
+        const cookieMonthLife = @SharedInfo.Rgpd.TimeLife;
+    </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

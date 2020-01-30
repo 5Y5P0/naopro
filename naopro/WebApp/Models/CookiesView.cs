@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebApp.Models
 {
-    public class Rgpd
+    public class CookiesView
     {
         /// <summary>
         /// Durée de conservation en mois

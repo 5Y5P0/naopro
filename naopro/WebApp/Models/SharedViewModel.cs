@@ -8,12 +8,13 @@ namespace WebApp.Models
 {
     public class SharedViewModel
     {
-        private readonly Contact _contact;
-
-        public SharedViewModel(IOptions<Contact> contact) {
-            _contact = contact?.Value ?? throw new ArgumentNullException(nameof(contact));
+        public SharedViewModel(IOptions<Contact> contact, CookiesView rgpd) {
+            Contact = contact?.Value ?? throw new ArgumentNullException(nameof(contact));
+            Rgpd = rgpd ?? throw new ArgumentNullException(nameof(rgpd));
         }
 
-        public string Name { get { return _contact.Name; } }
+        public Contact Contact { get; }
+
+        public CookiesView Rgpd { get; }
     }
 }

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Règlement général sur la protection des données";
+    ViewData["Title"] = "Vie privée";
 }
 
 @section Style {
@@ -12,6 +12,15 @@
 
 @*https://www.creditmutuel.com/fr/donnees-personnelles-et-gestion-des-cookies*@
 @*https://www.cnil.fr/fr/conformite-rgpd-information-des-personnes-et-transparence*@
+@*https://info.pagesjaunes.fr/infoslegales/vieprivee-protection/*@
+
+<h5>Notre politique</h5>
+<p>
+    Notre entreprise (ou ci-après «  nous ») met tout en oeuvre pour respecter la confiance que vous nous accordez et
+    traiter les données à caractère personnel que vous pouvez être amené à nous communiquer en conformité avec la réglementation applicable
+    , y compris le règlement général sur la protection des données personnelles (EU n°2016/679).
+</p>
+<a target="_blank" href="https://www.cnil.fr/fr/rgpd-de-quoi-parle-t-on" role="button" class="btn btn-primary">En savoir plus sur cnil.fr</a>
 
 <h5>Qu'est-ce que c'est ?</h5>
 <p>
@@ -21,21 +30,75 @@
 </p>
 <a target="_blank" href="https://fr.wikipedia.org/wiki/R%C3%A8glement_g%C3%A9n%C3%A9ral_sur_la_protection_des_donn%C3%A9es" role="button" class="btn btn-primary">En savoir plus sur Wikipedia.org</a>
 
-<h5>Notre engagement</h5>
+<h5>Qui collecte les données à caractère personnel</h5>
 <p>
-    Notre entreprise (ou ci-après «  nous ») met tout en oeuvre pour respecter la confiance que vous nous accordez et
-    traiter les données à caractère personnel que vous pouvez être amené à nous communiquer en conformité avec la réglementation applicable
-    , y compris le Règlement général sur la protection des données personnelles (EU n°2016/679).
+
 </p>
 <a target="_blank" href="https://www.cnil.fr/fr/rgpd-de-quoi-parle-t-on" role="button" class="btn btn-primary">En savoir plus sur cnil.fr</a>
 
-<h5>Qui collecte les données à caractère personnel</h5>
+<h5>Quels sont vos droits ?</h5>
 <p>
-    Nous mettons tout en oeuvre pour respecter la confiance que vous nous accordez et
-    traiter les données à caractère personnel que vous pouvez être amené à nous communiquer en conformité avec la réglementation applicable
-    , y compris le Règlement général sur la protection des données personnelles (EU n°2016/679).
+    Vous disposez d'un droit d’accès, de rectification et d’effacement de vos données.
+    S’il existe un doute sur votre identité un justificatif d’identité pourra vous être demandé.
 </p>
-<a target="_blank" href="https://www.cnil.fr/fr/rgpd-de-quoi-parle-t-on" role="button" class="btn btn-primary">En savoir plus sur cnil.fr</a>
+<p>
+    @{ Contact contact = SharedInfo.Contact; }
+    Vous pouvez exercer ces droits :
+    <ol>
+        <li>dans votre espace personnel si vous êtes déja insrits sur notre site : <a href="{{ url('/login') }}">ici</a></li>
+        <li>par voie postale à l’adresse suivante :
+<p>@contact.Name</p>
+<p>@contact.Address</p>
+<p>@contact.City <span style="margin-left:5rem">@contact.Postcode</span>
+<p>@contact.Country</p>
+        </li>
+<li>
+    par email en écrivant à l’adresse suivante : <a href="mailto:@contact.Mail">@contact.Mail</a>
+</li>
+<li>
+    par téléphone : <a href="phone:@contact.Phone">@contact.Mail</a>
+</li>
+<li>
+    par formulaire sur notre page de contact : <a href="{{ url('/contact') }}">ici</a>
+</li>
+    </ol>
+
+<h5>Données personnelles concernées</h5>
+<table>
+    <thead>
+        <tr><th>Description</th><th>Finalité du traitement</th><th>Durée de conservation</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>Données</td><td>Finalités des traitements</td></tr>
+    </tbody>
+</table>
+
+Vous pouvez également paramétrer les données collectées directement dans l’Application, et choisir de désactiver ou activer à tout moment :
+
+la collecte de données d’usage de l’Application pour des finalités statistiques ;
+la collecte de données de géolocalisation pour des finalités de personnalisation de nos services ;
+la collecte de données de géolocalisation pour des finalités publicitaires ;
+la transmission de vos données de géolocalisation à nos partenaires pour des finalités publicitaires.
+Enfin, vous pouvez nous signaler un contenu inapproprié ou nous demander de « flouter » une image si vous arrivez à vous reconnaître. Par ailleurs, tout résident, locataire ou propriétaire, lorsqu’il est seul occupant d’un immeuble ou d’une maison ainsi que l’ensemble des copropriétaires d’un immeuble peuvent demander la suppression d’une vue immersive de cet immeuble ou maison sous réserve de fournir un justificatif de domicile.
+
+Vous pouvez exercer les droits décrits ci-dessus en utilisant le formulaire prévu à cet effet sur l’Application, rubrique « signaler un abus » à partir de l’image en question, ou en écrivant à Solocal Direction Juridique – Data Protection Officer, 204, Rond-point du Pont de Sèvres, 92649 Boulogne Billancourt Cedex, en nous indiquant la localisation exacte de la prise de vue.
+
+Vous avez également le droit d’introduire une réclamation à notre rencontre auprès de l’autorité de contrôle.
+
+Notifications
+
+Par défaut, votre terminal est paramétré pour accepter les notifications.
+
+Néanmoins, vous pouvez à tout moment décider de ne pas voir s’afficher ces notifications.
+
+Sur iOS : rendez-vous dans les Réglages de votre terminal / Sélection de l’application PagesJaunes / Notifications (Pastilles) / Décocher « Autoriser les notifications » ou bien directement dans Notifications / Sélection de l’application PagesJaunes (Pastilles) / Décocher « Autoriser les notifications ».
+Sur Android : rendez-vous dans les paramètres de votre téléphone, onglet général, puis Application, puis choisissez l’application PagesJaunes et décochez la case « Afficher les notifications ».
+Modifications de la présente rubrique
+
+Nous nous réservons le droit de modifier, à tout moment et sans préavis, tout ou partie de nos règles relatives à la protection de la vie privée. En conséquence, nous vous conseillons de vous référer régulièrement à la dernière version desdites règles disponible en permanence dans notre Site. Les modifications entrent en vigueur à la date de leur mise en ligne sur notre Site et sont opposables à la date de votre première utilisation de celle-ci. L’utilisation de notre Site implique la pleine et entière acceptation de toute révision ou modification de nos règles relatives à la protection de la vie privée.
+
+
+
 
 1. Finalités de traitement – Base juridique
 En fonction des pages à partir desquelles vous nous transmettez vos données à caractère personnel, nous les traiterons pour les finalités suivantes :
