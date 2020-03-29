@@ -1,5 +1,6 @@
 ﻿@{
-    ViewData["Title"] = "Vie privée";
+    ViewData["Title"] = "Politique de confidentialité";
+    Contact contact = SharedInfo.Contact;
 }
 
 @section Style {
@@ -10,128 +11,264 @@
     <span>@ViewData["Title"]</span>
 </h1>
 
-@*https://www.creditmutuel.com/fr/donnees-personnelles-et-gestion-des-cookies*@
+@*https://www.cnil.fr/fr/cookies-traceurs-que-dit-la-loi*@
 @*https://www.cnil.fr/fr/conformite-rgpd-information-des-personnes-et-transparence*@
-@*https://info.pagesjaunes.fr/infoslegales/vieprivee-protection/*@
+@*https://www.bing.com/search?q=g%c3%a9n%c3%a9rateur+page+d%27information+rgpd&qs=HS&pq=g%c3%a9n%c3%a9rateur+&sc=8-11&cvid=1D5A41FA327448BD8222F4E1B79C08B0&FORM=QBRE&sp=1*@
+@*https://www.tlmr-avocats.com/e-services/generateur-de-politique-de-confidentialite-conforme-rgpd/*@
 
-<h5>Notre politique</h5>
-<p>
-    Notre entreprise (ou ci-après «  nous ») met tout en oeuvre pour respecter la confiance que vous nous accordez et
-    traiter les données à caractère personnel que vous pouvez être amené à nous communiquer en conformité avec la réglementation applicable
-    , y compris le règlement général sur la protection des données personnelles (EU n°2016/679).
-</p>
-<a target="_blank" href="https://www.cnil.fr/fr/rgpd-de-quoi-parle-t-on" role="button" class="btn btn-primary">En savoir plus sur cnil.fr</a>
+<div style="margin-bottom:1em;margin-top:2em;">
+    <h4 style="margin-bottom:0px;margin-top:0px;">Définitions</h4>
+    <ul style="list-style-type: none;margin-bottom:0px;margin-top:0px;padding-left:0px">
+        <li><b>L'Éditeur</b> : nous, la personne physique ou morale qui édite les services de communication au public en ligne.</li>
+        <li><b>Le Site</b> : L'ensemble du site ou les pages Internet et les services en ligne proposés par l'Éditeur.</li>
+        <li><b>L'Utilisateur</b> : vous, la personne utilisant le Site et les services.</li>
+    </ul>
+</div>
 
-<h5>Qu'est-ce que c'est ?</h5>
-<p>
-    Le règlement général sur la protection des données (RGPD), est un règlement de l'Union européenne
-    qui constitue le texte de référence en matière de protection des données à caractère personnel.
-    Il renforce et unifie la protection des données pour les individus au sein de l'Union européenne.
-</p>
-<a target="_blank" href="https://fr.wikipedia.org/wiki/R%C3%A8glement_g%C3%A9n%C3%A9ral_sur_la_protection_des_donn%C3%A9es" role="button" class="btn btn-primary">En savoir plus sur Wikipedia.org</a>
+<div style="margin-bottom:1em;margin-top:2em;">
+    <h4>Avant-propos</h4>
+    <p>
+        Cette notice à pour but d'informer l'Utilisateur sur ses droits et
+        la nature des traitements qui sont réalisés avec ses données personnelles.
+    </p>
+    <p>
+        Au-delà du Règlement Général sur la Protection des Données (RGPD) européen,
+        nous nous engageons à être transparent
+        sur notre politique en matière de données personnelles.
+    </p>
+    <p>
+        À tout moment, vous pouvez nous contacter pour obtenir des renseignements, demander des corrections, effacer ou récupérer
+        vos données personnelles.
+    </p>
+</div>
 
-<h5>Qui collecte les données à caractère personnel</h5>
-<p>
-
-</p>
-<a target="_blank" href="https://www.cnil.fr/fr/rgpd-de-quoi-parle-t-on" role="button" class="btn btn-primary">En savoir plus sur cnil.fr</a>
-
-<h5>Quels sont vos droits ?</h5>
-<p>
-    Vous disposez d'un droit d’accès, de rectification et d’effacement de vos données.
-    S’il existe un doute sur votre identité un justificatif d’identité pourra vous être demandé.
-</p>
-<p>
-    @{ Contact contact = SharedInfo.Contact; }
-    Vous pouvez exercer ces droits :
-    <ol>
-        <li>dans votre espace personnel si vous êtes déja insrits sur notre site : <a href="{{ url('/login') }}">ici</a></li>
-        <li>par voie postale à l’adresse suivante :
-<p>@contact.Name</p>
-<p>@contact.Address</p>
-<p>@contact.City <span style="margin-left:5rem">@contact.Postcode</span>
-<p>@contact.Country</p>
+<div style="margin-bottom:1em;margin-top:2em;">
+    <h4>Nous contacter</h4>
+    <p>Pour nous joindre, vous pouvez :</p>
+    <ul>
+        <li>
+            contacter le responsable RGPD : @contact.Name à l'adresse électronique dédiée : <a href="mailto:@SharedInfo.Rgpd.Mail">@SharedInfo.Rgpd.Mail</a>
         </li>
-<li>
-    par email en écrivant à l’adresse suivante : <a href="mailto:@contact.Mail">@contact.Mail</a>
-</li>
-<li>
-    par téléphone : <a href="phone:@contact.Phone">@contact.Mail</a>
-</li>
-<li>
-    par formulaire sur notre page de contact : <a href="{{ url('/contact') }}">ici</a>
-</li>
-    </ol>
+        <li>
+            téléphoner au : <a href="tel:@contact.Cellphone">@contact.Cellphone</a>
+        </li>
+        <li>
+            téléphone au : <a href="tel:@contact.Phone">@contact.Phone</a>
+        </li>
+        <li>
+            écrire un message électronique à l'adresse : <a href="mailto:@contact.Mail">@contact.Mail</a>
+        </li>
+        <li>
+            écrire un message sur notre page dédiée au contact <a asp-area="" asp-controller="Home" asp-action="Contact">ici</a>
+        </li>
+        <li>
+            écrire un courrier à l'adresse postale
+            <ul>
+                <li>@contact.Name</li>
+                <li>@contact.Address</li>
+                <li>@contact.Country - @contact.Postcode</li>
+                <li>@contact.City</li>
+            </ul>
+        </li>
+    </ul>
+</div>
 
-<h5>Données personnelles concernées</h5>
-<table>
-    <thead>
-        <tr><th>Description</th><th>Finalité du traitement</th><th>Durée de conservation</th></tr>
-    </thead>
-    <tbody>
-        <tr><td>Données</td><td>Finalités des traitements</td></tr>
-    </tbody>
-</table>
+<div style="margin-bottom:1em;margin-top:2em">
+    <h4>Nature des données collectées</h4>
+    <p><b>Dans le cadre de l'utilisation du Site, l'Éditeur est susceptible de collecter les catégories de données suivantes concernant ses Utilisateurs.</b></p>
 
-Vous pouvez également paramétrer les données collectées directement dans l’Application, et choisir de désactiver ou activer à tout moment :
+    <h5 style="margin-top:initial">Gestion des comptes Utilisateur</h5>
+    <table class="table table-bordered">
+        <tr><th>Objectif(s) du traitement</th><th>Donnée(s) personnelle(s) concernée(s)</th><th>Durée de conservation</th><th>Destinataire(s)</th></tr>
+        <tr>
+            <td class="align-middle">
+                <ul>
+                    <li>Identifier techniquement l'Utilisateur dans notre base de données</li>
+                    <li>Identifier les informations associées à l'Utilisateur</li>
+                </ul>
+            </td>
+            <td class="align-middle">Identifiant généré</td>
+            <td class="align-middle">@SharedInfo.Rgpd.General.TimeLife mois</td>
+            <td class="align-middle">L'Éditeur</td>
+        </tr>
+        <tr>
+            <td class="align-middle">
+                <ul>
+                    <li>Echanger avec l'Utilisateur à sa demande</li>
+                </ul>
+            </td>
+            <td class="align-middle">adresse de messagerie électronique ou e-mail</td>
+            <td class="align-middle">@SharedInfo.Rgpd.General.TimeLife mois</td>
+            <td class="align-middle">L'Éditeur</td>
+        </tr>
+        <tr>
+            <td class="align-middle">
+                <ul>
+                    <li>Fournir un code d'authentification <sup>(1)</sup> par SMS</li>
+                    <li>Contacter l'Utilisateur après accord explicite</li>
+                </ul>
+            </td>
+            <td class="align-middle">Numéro de téléphone portable</td>
+            <td class="align-middle">@SharedInfo.Rgpd.General.TimeLife mois</td>
+            <td class="align-middle">L'Éditeur</td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="align-middle">
+                <ul>
+                    <li>Préciser le destinataire dans les échanges avec l'Utilisateur</li>
+                    <li>Personnaliser l'espace privé de l'Utilisateur sur le Site</li>
+                </ul>
+            </td>
+            <td class="align-middle">
+                Nom
+            </td>
+            <td rowspan="2" class="align-middle">@SharedInfo.Rgpd.General.TimeLife mois</td>
+            <td rowspan="2" class="align-middle">L'Éditeur</td>
+        </tr>
+        <tr>
+            <td class="align-middle">
+                Prénom
+            </td>
+        </tr>
+    </table>
 
-la collecte de données d’usage de l’Application pour des finalités statistiques ;
-la collecte de données de géolocalisation pour des finalités de personnalisation de nos services ;
-la collecte de données de géolocalisation pour des finalités publicitaires ;
-la transmission de vos données de géolocalisation à nos partenaires pour des finalités publicitaires.
-Enfin, vous pouvez nous signaler un contenu inapproprié ou nous demander de « flouter » une image si vous arrivez à vous reconnaître. Par ailleurs, tout résident, locataire ou propriétaire, lorsqu’il est seul occupant d’un immeuble ou d’une maison ainsi que l’ensemble des copropriétaires d’un immeuble peuvent demander la suppression d’une vue immersive de cet immeuble ou maison sous réserve de fournir un justificatif de domicile.
+    <ul>
+        <il><sup>(1)</sup><i>Strategie de sécurité renforcée par double authentification</i></il>
+    </ul>
+    
+</div>
 
-Vous pouvez exercer les droits décrits ci-dessus en utilisant le formulaire prévu à cet effet sur l’Application, rubrique « signaler un abus » à partir de l’image en question, ou en écrivant à Solocal Direction Juridique – Data Protection Officer, 204, Rond-point du Pont de Sèvres, 92649 Boulogne Billancourt Cedex, en nous indiquant la localisation exacte de la prise de vue.
+<div style="margin-bottom:1em;margin-top:2em">
+    <h4 style="margin-top:initial">Agrégation des données</h4>
+    <h5 style="margin-top:initial">Agrégation avec des données non personnelles</h5>
+    <p>
+        Nous pouvons publier, divulguer et utiliser les informations agrégées
+        (informations relatives à tous nos Utilisateurs ou à des groupes ou catégories spécifiques d'Utilisateurs
+        que nous combinons de manière à ce qu'un Utilisateur individuel ne puisse plus être identifié ou mentionné)
+        et les informations non personnelles à des fins d'analyse du secteur et du marché, de profilage démographique,
+        à des fins promotionnelles et publicitaires et à d'autres fins commerciales.
+    </p>
+    <h5 style="margin-top: initial">Agrégation avec des données personnelles disponibles sur les comptes sociaux de l'Utilisateur</h5>
+    <p>
+        Si vous connectez votre compte Utilisateur au compte d’un autre service afin de faire des envois,
+        ledit service pourra nous communiquer vos informations de profil, de connexion,
+        ainsi que toute autre information dont vous avez autorisé la divulgation.
+        Nous pouvons agréger les informations relatives à tous nos autres Utilisateurs,
+        groupes, comptes, aux données personnelles disponibles sur l’Utilisateur.
+    </p>
+</div>
 
-Vous avez également le droit d’introduire une réclamation à notre rencontre auprès de l’autorité de contrôle.
+<div style="margin-bottom:1em;margin-top:2em">
+    <h4>Cookies</h4>
+    <h5>Durée de conservation des cookies</h5>
+    <p>
+        Conformément aux recommandations de la CNIL, la durée maximale de conservation des cookies
+        est de  @SharedInfo.Rgpd.Cookie.TimeLife mois au maximum après leur premier dépôt dans le terminal de l'Utilisateur,
+        tout comme la durée de la validité du consentement de l’Utilisateur à l’utilisation de ces cookies.
+        La durée de vie des cookies n’est pas prolongée à chaque visite.
+        Le consentement de l’Utilisateur devra donc être renouvelé à l'issue de ce délai.
+        @{ //TODO: Optimiser le script cookies : suppression automatique si cookie expiré, redemander l'accord
+        }
+    </p>
+    <h5>Finalité cookies</h5>
+    <p>
+        Les cookies peuvent être utilisés pour des fins statistiques notamment
+        pour optimiser les services rendus à l'Utilisateur,
+        à partir du traitement des informations concernant la fréquence d'accès,
+        la personnalisation des pages ainsi que les opérations réalisées et les informations consultées.
+        Vous êtes informé que l'Éditeur est susceptible de déposer des cookies sur votre terminal.
+        Le cookie enregistre des informations relatives à la navigation sur le service
+        (les pages que vous avez consultées, la date et l'heure de la consultation...)
+        que nous pourrons lire lors de vos visites ultérieures.
+    </p>
+    <h5>Personnaliser mon consentement</h5>
+    <p>
+        l'Utilisateur peut demander à supprimer tout ou partie des cookies déposés sur son terminal par le Site.
+        Une page spécique est disponible pour cette usage, vous pouvez la consulter : <a asp-controller="Notice" asp-action="Cookies">ici</a>
+    </p>
+</div>
 
-Notifications
+<div style="margin-bottom:1em;margin-top:2em">
+    <h4>Délai de conservation des données personnelles et d'anonymisation</h4>
+    <h5>Suppression des données après suppression du compte</h5>
+    <p>
+        Des moyens de purge de données sont mis en place afin d'en prévoir la suppression effective dès lors que la durée de conservation
+        ou d'archivage nécessaire à l'accomplissement des finalités déterminées ou imposées est atteinte.
+        Conformément à la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés,
+        vous disposez par ailleurs d'un droit de suppression sur vos données que vous pouvez exercer à tout moment en prenant contact avec l'Éditeur.
+        @{ //TODO: Mettre les moyens de purge en place
+        }
+    </p>
+    <h5>Suppression des données après 3 ans d'inactivité</h5>
+    <p>
+        Pour des raisons de sécurité, si vous ne vous êtes pas authentifié sur le Site pendant une période de trois ans,
+        vous recevrez un e-mail vous invitant à vous connecter dans les plus brefs délais,
+        sans quoi vos données seront supprimées de nos bases de données.
+        @{ //TODO: Envoi mail d'avertissement avant les 3 ans
+            //TODO: script de suppression des données personnelles au bout de 3 ans
+        }
+    </p>
+</div>
 
-Par défaut, votre terminal est paramétré pour accepter les notifications.
+<div style="margin-bottom:1em;margin-top:2em">
+    <h4>Suppression du compte</h4>
+    <h5>Suppression du compte à la demande</h5>
+    <p>
+        L'Utilisateur a la possibilité de supprimer son Compte à tout moment, par simple demande à l'Éditeur
+        OU par le menu de suppression de Compte présent dans les paramètres du Compte le cas échéant.
+        @{ //TODO: Bouton supprimer mon compte
+        }
+    </p>
+    <h5>Suppression du compte en cas de violation des CGU</h5>
+    <p>
+        En cas de violation d'une ou de plusieurs dispositions des CGU ou
+        de tout autre document incorporé aux présentes par référence,
+        l'Éditeur se réserve le droit de mettre fin ou restreindre
+        sans aucun avertissement préalable et à sa seule discrétion,
+        votre usage et accès aux services, à votre compte et à tous les Sites.
+    </p>
+</div>
 
-Néanmoins, vous pouvez à tout moment décider de ne pas voir s’afficher ces notifications.
+<div style="margin-bottom:1em;margin-top:2em">
+    <h4>Indications en cas de faille de sécurité décelée par l'Éditeur</h4>
+    <h5>Information de l'Utilisateur en cas de faille de sécurité</h5>
+    <p>
+        Nous nous engageons à mettre en oeuvre toutes les mesures techniques et organisationnelles appropriées
+        afin de garantir un niveau de sécurité adapté au regard des risques d'accès accidentels,
+        non autorisés ou illégaux, de divulgation, d'altération, de perte ou encore de destruction
+        des données personnelles vous concernant.
+        Dans l'éventualité où nous prendrions connaissance d'un accès illégal aux données personnelles
+        vous concernant stockées sur nos serveurs ou ceux de nos prestataires,
+        ou d'un accès non autorisé ayant pour conséquence la réalisation des risques identifiés ci-dessus,
+        nous nous engageons à :
+    </p>
+    <ul>
+        <li>Vous notifier l'incident dans les plus brefs délais</li>
+        <li>Examiner les causes de l'incident et vous en informer</li>
+        <li>
+            Prendre les mesures nécessaires dans la limite du raisonnable afin d'amoindrir
+            les effets négatifs et préjudices pouvant résulter dudit incident
+        </li>
+    </ul>
+    <h5>Limitation de la responsabilité</h5>
+    <p>
+        En aucun cas les engagements définis au point ci-dessus relatifs à la notification
+        en cas de faille de sécurité ne peuvent être assimilés à une quelconque reconnaissance
+        de faute ou de responsabilité quant à la survenance de l'incident en question.
+    </p>
+</div>
 
-Sur iOS : rendez-vous dans les Réglages de votre terminal / Sélection de l’application PagesJaunes / Notifications (Pastilles) / Décocher « Autoriser les notifications » ou bien directement dans Notifications / Sélection de l’application PagesJaunes (Pastilles) / Décocher « Autoriser les notifications ».
-Sur Android : rendez-vous dans les paramètres de votre téléphone, onglet général, puis Application, puis choisissez l’application PagesJaunes et décochez la case « Afficher les notifications ».
-Modifications de la présente rubrique
-
-Nous nous réservons le droit de modifier, à tout moment et sans préavis, tout ou partie de nos règles relatives à la protection de la vie privée. En conséquence, nous vous conseillons de vous référer régulièrement à la dernière version desdites règles disponible en permanence dans notre Site. Les modifications entrent en vigueur à la date de leur mise en ligne sur notre Site et sont opposables à la date de votre première utilisation de celle-ci. L’utilisation de notre Site implique la pleine et entière acceptation de toute révision ou modification de nos règles relatives à la protection de la vie privée.
-
-
-
-
-1. Finalités de traitement – Base juridique
-En fonction des pages à partir desquelles vous nous transmettez vos données à caractère personnel, nous les traiterons pour les finalités suivantes :
-
-Répondre aux messages et aux demandes que vous nous adressez par l’intermédiaire du formulaire « Nous contacter » et/ou de l’adresse email pressecontact@creditmutuel.fr ;
-Traiter les candidatures que vous nous adressez par l’intermédiaire des rubriques dédiées à cet effet ;
-Vous adresser des informations relatives au Crédit Mutuel, lorsque vous avez souscrit à l’envoi de notre lettre d’information.
-Ces traitements sont mis en œuvre sur la base de votre consentement.
-
-
-2. Destinataires des données personnelles
-Vos données à caractère personnel seront transmises au personnel dûment habilité de la Confédération Nationale du Crédit Mutuel, ainsi qu’à ceux de ses prestataires qui sont conduits à traiter ces données pour le compte de la Confédération Nationale du Crédit Mutuel. En particulier, les informations recueillies à travers notre site Internet ne seront utilisées et ne feront l'objet de communication extérieure aux sociétés membres ou filiales du groupe Crédit Mutuel que pour les seules nécessités de la gestion ou pour satisfaire aux obligations légales et réglementaires. En aucun cas ces informations ne seront transmises ou a fortiori commercialisées à des tiers.
-
-
-3. Durée de conservation
-Vos données collectées dans le cadre d’une question adressée à la Confédération Nationale du Crédit Mutuel seront conservées le temps du traitement de cette question.
-
-Vos données collectées en relation avec le dépôt de votre candidature seront conservées pendant le temps de son traitement et ensuite pendant une durée de deux ans sauf opposition de votre part, à moins que vous n’ayez consenti à leur conservation pour une durée supérieure.
-
-Enfin, vos données collectées pour l’inscription à notre lettre d’information seront conservées jusqu’au retrait de votre consentement à la réception de cette lettre.
-
-
-
-4. Vos droits
-En application de la loi n° 78-17 du 6 janvier 1978 relative à l’informatique, aux fichiers et aux libertés modifiée, et du Règlement général sur la protection des données UE n°2016/679, chaque personne dispose d’un droit d’accès, de rectification, d’opposition, d’effacement, de portabilité et à la limitation du traitement.
-
-Vous avez le droit de retirer votre consentement à tout moment lorsque le traitement de vos données repose sur votre consentement. Vous disposez également du droit de définir des directives particulières pour le traitement de vos données après votre décès, ainsi que du droit d’introduire une réclamation auprès d’une autorité de contrôle.
-
-Nous avons désigné un Délégué à la Protection des Données dont les coordonnées sont « Madame ou Monsieur le Délégué à la Protection des Données, Confédération Nationale du Crédit Mutuel, 88-90 rue Cardinet, 75017 Paris – France ».
-
-Vous pouvez exercer vos droits en utilisant à votre convenance l'un ou l'autre des moyens suivants :
-
-par courrier au Délégué à la Protection des Données dont les coordonnées sont « Madame ou Monsieur le Délégué à la Protection des Données, Confédération Nationale du Crédit Mutuel, 88-90 rue Cardinet, 75017 Paris – France » ;
-par mail à l'adresse suivante : dpdcncm@creditmutuel.fr
-Par ailleurs, si vous souhaitez à un moment ou à un autre modifier les informations vous concernant que vous nous avez transmises, vous avez la possibilité de le faire en nous adressant un mail en cliquant ici.
-
+<div style="margin-bottom:1em;margin-top:2em">
+    <h4>Modification des CGU et de la politique de confidentialité</h4>
+    <p>
+        <b>
+            En cas de modification des présentes CGU, engagement de ne pas baisser le niveau de confidentialité de manière substantielle
+            sans l'information préalable des personnes concernées
+        </b>
+    </p>
+    <p>
+        Nous nous engageons à vous informer en cas de modification substantielle des présentes CGU,
+        et à ne pas baisser le niveau de confidentialité de vos données de manière substantielle
+        sans vous en informer et obtenir votre consentement.
+    </p>
+</div>

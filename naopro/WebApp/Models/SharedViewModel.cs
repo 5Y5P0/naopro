@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +9,25 @@ namespace WebApp.Models
 {
     public class SharedViewModel
     {
-        public SharedViewModel(IOptions<Contact> contact, CookiesView rgpd) {
+        IWebHostEnvironment _webHost;
+
+        public SharedViewModel(IOptions<Contact> contact, IOptions<RgpdView> rgpdConfig, IWebHostEnvironment webHost) {
+            
             Contact = contact?.Value ?? throw new ArgumentNullException(nameof(contact));
-            Rgpd = rgpd ?? throw new ArgumentNullException(nameof(rgpd));
+            _webHost = webHost ?? throw new ArgumentNullException(nameof(webHost));
+
+            if (rgpdConfig == null)
+                throw new ArgumentNullException(nameof(rgpdConfig));
+
+            Rgpd = rgpdConfig.Value;
+            
         }
 
         public Contact Contact { get; }
 
-        public CookiesView Rgpd { get; }
+        public RgpdView Rgpd { get; }
+
+        public string WebHost { get { return _webHost.WebRootPath; } }
+
     }
 }

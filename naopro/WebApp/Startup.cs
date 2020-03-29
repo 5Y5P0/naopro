@@ -56,7 +56,7 @@ namespace WebApp
 
             services.AddControllersWithViews();
 
-            services.AddScoped<SmtpClient>((serviceProvider) =>
+            services.AddScoped((serviceProvider) =>
             {
                 var config = serviceProvider.GetRequiredService<IConfiguration>();
                 return new SmtpClient()
@@ -70,14 +70,16 @@ namespace WebApp
                 };
             });
 
-            services.AddScoped<CookiesView>((serviceProvider) =>
-            {
-                var config = serviceProvider.GetRequiredService<IConfiguration>();
-                return new CookiesView()
-                {
-                    TimeLife = config.GetValue<int>("Rgpd:TimeLife")
-                };
-            });
+            services.Configure<RgpdView>(Configuration.GetSection("Rgpd"));
+            //services.AddScoped<RgpdView>((serviceProvider) =>
+            //{
+            //    var config = serviceProvider.GetRequiredService<IConfiguration>();
+            //    Newtonsoft.Json.Serialization.Se
+            //    return new RgpdView()
+            //    {
+            //        Cookie = config.GetValue<int>("Rgpd")
+            //    };
+            //});
 
             services.Configure<IISServerOptions>(options =>
             {
@@ -92,7 +94,7 @@ namespace WebApp
 
             services.AddTransient<SharedViewModel>();
 
-            #region Le numéro de version récupérer
+            #region Récupérer le numéro de version
 
             /*
              * ! Fenêtre propriété du projet / onglet package / Version de package
