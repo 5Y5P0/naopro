@@ -11,6 +11,9 @@ using WebApp.Models;
 
 namespace WebApp.Controllers
 {
+    /// <summary>
+    /// test
+    /// </summary>
     public class NoticeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
